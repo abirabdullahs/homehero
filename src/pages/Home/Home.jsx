@@ -30,7 +30,7 @@ const Home = () => {
             <Suspense fallback={<Loader1></Loader1>}>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-6 mb-5">
                     {
-                        services.map((skill, index) => (
+                        services.slice(0,8).map((skill, index) => (
                             <div key={skill._id} data-aos="zoom-in" data-aos-delay={index * 100}>
                                 <Card skill={skill} />
                             </div>

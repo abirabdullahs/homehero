@@ -10,7 +10,9 @@ import Profile from '../pages/Profile/Profile';
 import UpdateProfile from './../pages/Profile/UpdateProfile';
 import AddService from '../pages/AddService/AddService';
 import MyServices from '../pages/my-services/MyServices';
-
+import ServiceDetails from '../ServiceDetailes/ServiceDetailes';
+import PrivateRoute from './../PrivateRoute/PrivateRoute';
+import MyBookings from './../MyBookings/MyBookings';
 
 
 export const router = createBrowserRouter([
@@ -32,25 +34,63 @@ export const router = createBrowserRouter([
         path:'signUp',
         Component: Signup
       },
+
+      // ✅ Private Routes
       {
         path:'password-reset',
-        Component: ForgetPassword
+        Component: () => (
+          <PrivateRoute>
+            <ForgetPassword />
+          </PrivateRoute>
+        )
       },
       {
         path:'profile',
-        Component: Profile
+        Component: () => (
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        )
       },
       {
         path:'update-profile',
-        Component: UpdateProfile
+        Component: () => (
+          <PrivateRoute>
+            <UpdateProfile />
+          </PrivateRoute>
+        )
       },
       {
         path: 'add-service',
-        Component: AddService
+        Component: () => (
+          <PrivateRoute>
+            <AddService />
+          </PrivateRoute>
+        )
       },
       {
         path: 'my-services',
-        Component: MyServices
+        Component: () => (
+          <PrivateRoute>
+            <MyServices />
+          </PrivateRoute>
+        )
+      },
+      {
+        path: 'service/:id',
+        Component: () => (
+          <PrivateRoute>
+            <ServiceDetails />
+          </PrivateRoute>
+        )
+      },
+      {
+         path: 'my-bookings',
+        Component: () => (
+          <PrivateRoute>
+            <MyBookings></MyBookings>
+          </PrivateRoute>
+        )
       }
     ]
   },

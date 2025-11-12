@@ -12,7 +12,21 @@ const Provider = ({ children }) => {
 
     const [user, setUser] = useState(null);
     const [services, setServices] = useState([]);
+    const [bookings, setBookings] = useState([]);
     const [loading, setLoading] = useState(true);
+    // theme: 'light' | 'dark' - persisted in localStorage
+    const [theme, setTheme] = useState(() => {
+        try {
+            const stored = localStorage.getItem('theme');
+            if (stored) return stored;
+        } catch (e) {
+            // ignore
+        }
+        if (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            return 'dark';
+        }
+        return 'light';
+    });
 
 
     const createUser = (email, password) => {
@@ -42,6 +56,23 @@ const Provider = ({ children }) => {
     }, [])
 
 
+    // apply theme to document and persist
+    useEffect(() => {
+        try {
+            if (typeof document !== 'undefined') {
+                document.documentElement.setAttribute('data-theme', theme);
+            }
+            localStorage.setItem('theme', theme);
+        } catch (e) {
+            // ignore
+        }
+    }, [theme]);
+
+    const toggleTheme = () => {
+        setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+    }
+
+
 
 
     // API fetch function
@@ -56,19 +87,49 @@ const Provider = ({ children }) => {
         }
     };
 
+    const fetchBookings = async () => {
+        try {
+            const res = await axios.get(`${import.meta.env.VITE_SERVER}/bookings`); // তোমার API URL
+            setBookings(res.data); // context state update
+            setLoading(false);
+        } catch (error) {
+            console.error("Error fetching services:", error);
+            setLoading(false);
+        }
+    };
+
+
+
+
+   
+
 
     // component mount এ fetch
     useEffect(() => {
         fetchServices();
     }, []);
+
+    useEffect(() => {
+        fetchBookings();
+    }, []);
+
+
+
+
+
+
+
     const info = {
         createUser,
         signInUser,
         googleUser,
         user,
         loading,
+        theme,
+        toggleTheme,
         setServices,
         services,
+        bookings,
     }
 
 

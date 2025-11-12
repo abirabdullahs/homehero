@@ -2,7 +2,8 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Card = ({ skill }) => {
-  const Navigate = useNavigate()
+
+  const Navigate = useNavigate();
   return (
     <div
       className="group bg-white rounded-2xl shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden border border-gray-100"
@@ -33,11 +34,12 @@ const Card = ({ skill }) => {
           <span className="text-gray-500">{skill.name || "Provider"}</span>
         </div>
 
-       <Link to={`/service/${skill._id}`}>
-         <button className="block w-full text-center bg-linear-to-r from-purple-600 to-blue-500 text-white py-2.5 rounded-xl font-medium hover:from-purple-700 hover:to-blue-600 transition-all duration-300">
+        <Link
+        to={Navigate(`/service/${skill._id}`)}
+          className="block w-full text-center linear-to-r from-purple-600 to-blue-500 text-white py-2.5 rounded-xl font-medium hover:from-purple-700 hover:to-blue-600 transition-all duration-300"
+        >
           View Details
-        </button>
-       </Link>
+        </Link>
       </div>
     </div>
   );
