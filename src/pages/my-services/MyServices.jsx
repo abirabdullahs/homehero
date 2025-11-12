@@ -1,234 +1,221 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../../context/Context';
-import axios from 'axios';
-import Swal from 'sweetalert2';
+import React, { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../context/Context";
+import axios from "axios";
+import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 const MyServices = () => {
-    const [myServices, setMyServices] = useState([]);
+  const [myServices, setMyServices] = useState([]);
+  const [editingService, setEditingService] = useState(null);
 
-    const { user } = useContext(AuthContext)
-    useEffect(() => {
-        if (user?.email) {
-            axios.get(`${import.meta.env.VITE_SERVER}/services/${user.email}`)
-                .then(res => {
-                    console.log(res.data)
-                    setMyServices(res.data);
-                })
-                .catch(err => console.log(err))
-        }
-    }, [user])
+  const { user } = useContext(AuthContext);
 
 
-    const handleDelete = (id) => {
-
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                const res = axios.delete(`${import.meta.env.VITE_SERVER}/services/${id}`,)
-                console.log(res);
-                setMyServices(myServices.filter((service) => service._id !== id));
-
-            }
-        });
-
+  useEffect(() => {
+    if (user?.email) {
+      axios
+        .get(`${import.meta.env.VITE_SERVER}/services/${user.email}`)
+        .then((res) => setMyServices(res.data))
+        .catch((err) => console.log(err));
     }
+  }, [user]);
 
-    const [editingService, setEditingService] = useState(null);
 
-    const handleEdit = (service) => {
-        setEditingService(service);
-        document.getElementById('my_modal_5').showModal()
+  const handleDelete = async (id) => {
+    const confirm = await Swal.fire({
+      title: "Are you sure?",
+      text: "This service will be permanently deleted.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    });
+
+    if (confirm.isConfirmed) {
+      try {
+        await axios.delete(`${import.meta.env.VITE_SERVER}/services/${id}`);
+        setMyServices((prev) => prev.filter((s) => s._id !== id));
+
+        Swal.fire("Deleted!", "Your service has been removed.", "success");
+      } catch (err) {
+        toast.error("Failed to delete. Please try again.");
+        console.error(err);
+      }
     }
+  };
 
 
-    const handleUpdate = async (e, id) => {
-        e.preventDefault();
+  const handleEdit = (service) => {
+    setEditingService(service);
+    document.getElementById("edit_modal").showModal();
+  };
 
-        const serviceName = e.target.serviceName.value;
-        const description = e.target.description.value;
-        const imageURL = e.target.imageURL.value;
-        const price = e.target.price.value;
-        const category = e.target.category.value;
+  const handleUpdate = async (e) => {
+    e.preventDefault();
 
-        const updateBody = { serviceName, category, price, imageURL, description };
-
-        try {
-            const res = await axios.patch(`${import.meta.env.VITE_SERVER}/services/${id}`, updateBody);
-
-            if (res.data.modifiedCount > 0) {
-                setMyServices(prev =>
-                    prev.map(service =>
-                        service._id === id ? { ...service, ...updateBody } : service
-                    )
-                );
-
-
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "Your work has been saved",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-            }
-
-            console.log("Updated successfully!");
-        } catch (err) {
-            console.error(err);
-        }
+    const form = e.target;
+    const updatedService = {
+      serviceName: form.serviceName.value,
+      category: form.category.value,
+      price: form.price.value,
+      description: form.description.value,
+      imageUrl: form.imageUrl.value,
     };
 
+    try {
+      const res = await axios.patch(
+        `${import.meta.env.VITE_SERVER}/services/${editingService._id}`,
+        updatedService
+      );
 
-    return (
-        <div>
-            <div className="overflow-x-auto">
-                <table className="table">
-                    {/* head */}
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Name</th>
-                            <th>Category</th>
-                            <th>Price</th>
-                            <th className='text-center'>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {myServices.map((service, index) => (
-                            <tr key={service._id || index} className={index % 2 === 1 ? "hover:bg-base-300" : ""}>
-                                <th>{index + 1}</th>
-                                <td>{service.serviceName}</td>
-                                <td>{service.category}</td>
-                                <td>{service.price}</td>
-                                <td>
-                                    <div className="flex gap-2 justify-center">
-                                        <button className="btn btn-neutral" onClick={() => handleEdit(service)}>Edit</button>
-                                        <button className="btn btn-neutral" onClick={() => handleDelete(service._id)}>Delete</button>
-                                    </div>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+      if (res.data.modifiedCount > 0) {
+      
+        setMyServices((prev) =>
+          prev.map((s) =>
+            s._id === editingService._id ? { ...s, ...updatedService } : s
+          )
+        );
+
+        toast.success("Service updated successfully!");
+        document.getElementById("edit_modal").close();
+      } else {
+        toast("No changes detected.");
+      }
+    } catch (err) {
+      toast.error("Update failed. Try again.");
+      console.error(err);
+    }
+  };
+
+  return (
+    <div className="max-w-5xl mx-auto mt-10">
+      <h2 className="text-2xl font-bold mb-6 text-center">My Services</h2>
+
+
+      <div className="overflow-x-auto rounded-2xl border border-gray-200 shadow-md">
+        <table className="table w-full">
+          <thead className="bg-gray-100 text-gray-700 font-semibold">
+            <tr>
+              <th>#</th>
+              <th>Service Name</th>
+              <th>Category</th>
+              <th>Price (৳)</th>
+              <th className="text-center">Action</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {myServices.length === 0 ? (
+              <tr>
+                <td colSpan="5" className="text-center py-6 text-gray-500">
+                  No services found 😔
+                </td>
+              </tr>
+            ) : (
+              myServices.map((service, index) => (
+                <tr
+                  key={service._id}
+                  className="hover:bg-gray-50 transition duration-150"
+                >
+                  <td>{index + 1}</td>
+                  <td className="font-medium">{service.serviceName}</td>
+                  <td>{service.category}</td>
+                  <td>{service.price}</td>
+                  <td>
+                    <div className="flex justify-center gap-2">
+                      <button
+                        className="btn btn-sm btn-outline"
+                        onClick={() => handleEdit(service)}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="btn btn-sm btn-error text-white"
+                        onClick={() => handleDelete(service._id)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
+
+
+      <dialog id="edit_modal" className="modal modal-bottom sm:modal-middle">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg mb-4 text-center">Edit Service</h3>
+          <form className="space-y-4" onSubmit={handleUpdate}>
+            <div>
+              <label className="block font-medium mb-1">Service Name</label>
+              <input
+                type="text"
+                name="serviceName"
+                className="input input-bordered w-full"
+                defaultValue={editingService?.serviceName}
+                required
+              />
             </div>
 
+            <div>
+              <label className="block font-medium mb-1">Category</label>
+              <input
+                type="text"
+                name="category"
+                className="input input-bordered w-full"
+                defaultValue={editingService?.category}
+                required
+              />
+            </div>
 
+            <div>
+              <label className="block font-medium mb-1">Price</label>
+              <input
+                type="number"
+                name="price"
+                className="input input-bordered w-full"
+                defaultValue={editingService?.price}
+                required
+              />
+            </div>
 
-            <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
-                <div className="modal-box">
-                    <form className="space-y-4">
+            <div>
+              <label className="block font-medium mb-1">Description</label>
+              <textarea
+                name="description"
+                className="textarea textarea-bordered w-full h-24 resize-none"
+                defaultValue={editingService?.description}
+              ></textarea>
+            </div>
 
-                        {/* Service Name */}
-                        <div>
-                            <label className="block mb-1 font-medium">Service Name</label>
-                            <input
-                                type="text"
-                                name="serviceName"
-                                placeholder="Enter service name"
-                                className="input input-bordered w-full"
-                                defaultValue={editingService?.serviceName || ""}
-                            />
-                        </div>
+            <div>
+              <label className="block font-medium mb-1">Image URL</label>
+              <input
+                type="text"
+                name="imageUrl"
+                className="input input-bordered w-full"
+                defaultValue={editingService?.imageUrl}
+              />
+            </div>
 
-                        {/* Category */}
-                        <div>
-                            <label className="block mb-1 font-medium">Category</label>
-                            <input
-                                type="text"
-                                name="category"
-                                placeholder="Enter category"
-                                className="input input-bordered w-full"
-                                defaultValue={editingService?.category || ""}
-                            />
-                        </div>
+            <button type="submit" className="btn btn-primary w-full mt-4">
+              Save Changes
+            </button>
+          </form>
 
-                        {/* Price */}
-                        <div>
-                            <label className="block mb-1 font-medium">Price</label>
-                            <input
-                                type="number"
-                                name="price"
-                                placeholder="Enter price"
-                                className="input input-bordered w-full"
-                                defaultValue={editingService?.price || ""}
-                            />
-                        </div>
-
-                        {/* Description */}
-                        <div>
-                            <label className="block mb-1 font-medium">Description</label>
-                            <textarea
-                                name="description"
-                                placeholder="Enter service description"
-                                className="textarea textarea-bordered w-full h-24 resize-none"
-                                defaultValue={editingService?.description || ""}
-                            ></textarea>
-                        </div>
-
-                        {/* Image URL */}
-                        <div>
-                            <label className="block mb-1 font-medium">Image URL</label>
-                            <input
-                                type="text"
-                                name="imageUrl"
-                                placeholder="Enter image URL"
-                                className="input input-bordered w-full"
-                                defaultValue={editingService?.imageURL || ""}
-                            />
-                        </div>
-
-                        {/* Provider Name */}
-                        <div>
-                            <label className="block mb-1 font-medium">Provider Name</label>
-                            <input
-                                type="text"
-                                name="providerName"
-                                placeholder="Enter provider name"
-                                className="input input-bordered w-full"
-                                value={user?.displayName}
-                            />
-                        </div>
-
-                        {/* Email */}
-                        <div>
-                            <label className="block mb-1 font-medium">Email</label>
-                            <input
-                                type="email"
-                                name="email"
-                                placeholder="Enter your email"
-                                className="input input-bordered w-full"
-                                value={user?.email}
-                            />
-                        </div>
-
-                        {/* Submit Button */}
-                        <button
-                            type="submit"
-                            className="btn btn-primary w-full mt-4"
-                            onClick={() => handleUpdate(editingService._id)}
-                        >
-                            Update
-                        </button>
-                    </form>
-                    <div className="modal-action">
-                        <form method="dialog">
-                            {/* if there is a button in form, it will close the modal */}
-                            <button className="btn">Cencel</button>
-                        </form>
-                    </div>
-                </div>
-            </dialog>
-
-
+          <div className="modal-action">
+            <form method="dialog">
+              <button className="btn">Cancel</button>
+            </form>
+          </div>
         </div>
-    );
+      </dialog>
+    </div>
+  );
 };
 
 export default MyServices;
