@@ -88,26 +88,26 @@ const Signup = () => {
             <div className="hero bg-base-200 min-h-screen">
                 <div className="hero-content flex-col w-full">
                     <div className="text-center lg:text-left">
-                        <h1 className="text-5xl font-bold">Sign Up Now!</h1>
+                        <h1 className="text-5xl font-bold text-gray-800 dark:text-white">Sign Up Now!</h1>
                     </div>
                     <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
                         <div className="card-body">
                             <form onSubmit={handleRegister}>
                                 <fieldset className="fieldset">
-                                    <label className="label">Name</label>
-                                    <input type="text" className="input" name="name" placeholder="Your name" required />
+                                    <label className="label text-base-content">Name</label>
+                                    <input type="text" className="input dark:bg-base-200 dark:text-base-content dark:border-base-300" name="name" placeholder="Your name" required />
 
-                                    <label className="label">Photo URL</label>
-                                    <input type="text" className="input" name="photoURL" placeholder="Photo URL" />
+                                    <label className="label text-base-content">Photo URL</label>
+                                    <input type="text" className="input dark:bg-base-200 dark:text-base-content dark:border-base-300" name="photoURL" placeholder="Photo URL" />
 
-                                    <label className="label">Email</label>
-                                    <input type="email" className="input" name="email" placeholder="Email" required />
+                                    <label className="label text-base-content">Email</label>
+                                    <input type="email" className="input dark:bg-base-200 dark:text-base-content dark:border-base-300" name="email" placeholder="Email" required />
 
-                                    <label className="label">Password</label>
+                                    <label className="label text-base-content">Password</label>
                                     <div className="relative">
                                         <input
                                             type={showPassword ? "text" : "password"}
-                                            className={`input w-full ${error ? "border-red-500" : ""}`}
+                                            className={`input w-full dark:bg-base-200 dark:text-base-content dark:border-base-300 ${error ? "border-red-500" : ""}`}
                                             name="password"
                                             placeholder="Password"
                                             value={password}
@@ -118,7 +118,7 @@ const Signup = () => {
                                         <button 
                                             type="button"
                                             onClick={() => setShowPassword(!showPassword)}
-                                            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                                            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
                                         >
                                             {showPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
                                         </button>
@@ -137,16 +137,16 @@ const Signup = () => {
 
                             <button
                                 onClick={handleGoogleSignIn}
-                                className="flex items-center justify-center gap-2 w-full sm:w-auto bg-white text-gray-800 border border-gray-300 rounded-lg px-4 py-2 hover:bg-gray-50 hover:shadow-lg transition-all duration-200 active:scale-[0.98]"
+                                className="flex items-center justify-center gap-2 w-full sm:w-auto bg-white dark:bg-base-200 text-gray-800 dark:text-base-content border border-gray-300 dark:border-base-300 rounded-lg px-4 py-2 hover:bg-gray-50 dark:hover:bg-base-300 hover:shadow-lg transition-all duration-200 active:scale-[0.98]"
                             >
                                 <FcGoogle size={22} />
                                 <span className="font-medium">Sign up with Google</span>
                             </button>
 
-                            <p className="text-center mt-3">
+                            <p className="text-center mt-3 text-base-content">
                                 Already Registered?{" "}
                                 <Link to="/login">
-                                    <span className="text-blue-700">Login Now</span>
+                                    <span className="text-blue-700 dark:text-blue-400">Login Now</span>
                                 </Link>
                             </p>
                         </div>

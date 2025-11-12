@@ -22,7 +22,7 @@ const Profile = () => {
 
     return (
         <div>
-            <div className="max-w-sm mx-auto bg-white rounded-xl shadow-lg overflow-hidden p-6 text-center my-5">
+            <div className="max-w-sm mx-auto bg-white dark:bg-base-200 rounded-xl shadow-lg overflow-hidden p-6 text-center my-5">
             
                 <img
                     className="w-24 h-24 rounded-full mx-auto border-4 border-primary object-cover"
@@ -31,17 +31,17 @@ const Profile = () => {
                 />
 
            
-                <h2 className="mt-4 text-xl font-bold">{user.displayName || "User Name"}</h2>
+                <h2 className="mt-4 text-xl font-bold text-gray-800 dark:text-base-content">{user.displayName || "User Name"}</h2>
 
             
-                <div className="mt-2 space-y-1 text-gray-600">
-                    <p><strong>Email:</strong> {user.email || "user@example.com"}</p>
-                    <p><strong>Phone:</strong> {user.Number || "+880123456789"}</p>
-                    <p><strong>University:</strong> {user.Institue || "Your University"}</p>
+                <div className="mt-2 space-y-1 text-gray-600 dark:text-gray-300">
+                    <p><strong className="text-gray-800 dark:text-base-content">Email:</strong> {user.email || "user@example.com"}</p>
+                    <p><strong className="text-gray-800 dark:text-base-content">Phone:</strong> {user.Number || "+880123456789"}</p>
+                    <p><strong className="text-gray-800 dark:text-base-content">University:</strong> {user.Institue || "Your University"}</p>
                 </div>
 
                 <div>
-                    <button className='btn-primary bg-green-400 mt-7 px-5 rounded shadow-md py-1 w-full' onClick={handleClick}>Update Profile</button>
+                    <button className='btn-primary bg-green-400 dark:bg-green-600 mt-7 px-5 rounded shadow-md py-1 w-full text-white' onClick={handleClick}>Update Profile</button>
                 </div>
             </div>
         </div>

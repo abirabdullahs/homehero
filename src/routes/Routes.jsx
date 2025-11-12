@@ -13,6 +13,7 @@ import MyServices from '../pages/my-services/MyServices';
 import ServiceDetails from '../ServiceDetailes/ServiceDetailes';
 import PrivateRoute from './../PrivateRoute/PrivateRoute';
 import MyBookings from './../MyBookings/MyBookings';
+import AllServices from './../AllServices/AllServices';
 
 
 export const router = createBrowserRouter([
@@ -34,8 +35,12 @@ export const router = createBrowserRouter([
         path:'signUp',
         Component: Signup
       },
+      {
+          path:'services',
+          Component: AllServices
+      },
 
-      // ✅ Private Routes
+      //  Private Routes
       {
         path:'password-reset',
         Component: () => (

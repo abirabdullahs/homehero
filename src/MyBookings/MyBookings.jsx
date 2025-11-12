@@ -38,6 +38,10 @@ const MyBookings = () => {
     };
 
 
+const handleReview = () =>{
+    
+}
+
     useEffect(() => {
 
         if (!user?.email) return;
@@ -85,6 +89,7 @@ const MyBookings = () => {
                                         <td>
                                             <div className="flex justify-center gap-2">
                                                 <button className="btn btn-neutral text-white" onClick={()=>handleCancel(b._id)}>Cancel</button>
+                                                <button className="btn btn-neutral text-white" onClick={()=>handleReview(b._id)}>Review</button>
                                             </div>
                                         </td>
                                     </tr>

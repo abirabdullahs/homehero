@@ -43,89 +43,89 @@ const AddService = () => {
 
     }
     return (
-        <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md mt-10">
-            <h2 className="text-2xl font-bold mb-6 text-center">Add New Service</h2>
+        <div className="max-w-2xl mx-auto p-6 bg-white dark:bg-base-200 rounded-lg shadow-md mt-10">
+            <h2 className="text-2xl font-bold mb-6 text-center text-gray-800 dark:text-base-content">Add New Service</h2>
             <form className="space-y-4" onSubmit={handleSubmit}>
 
                 {/* Service Name */}
                 <div>
-                    <label className="block mb-1 font-medium">Service Name</label>
+                    <label className="block mb-1 font-medium text-gray-800 dark:text-base-content">Service Name</label>
                     <input
                         type="text"
                         name="serviceName"
                         placeholder="Enter service name"
-                        className="input input-bordered w-full"
+                        className="input input-bordered w-full dark:bg-base-300 dark:text-base-content dark:border-base-400"
                         required
                     />
                 </div>
 
                 {/* Category */}
                 <div>
-                    <label className="block mb-1 font-medium">Category</label>
+                    <label className="block mb-1 font-medium text-gray-800 dark:text-base-content">Category</label>
                     <input
                         type="text"
                         name="category"
                         placeholder="Enter category"
-                        className="input input-bordered w-full"
+                        className="input input-bordered w-full dark:bg-base-300 dark:text-base-content dark:border-base-400"
                         required
                     />
                 </div>
 
                 {/* Price */}
                 <div>
-                    <label className="block mb-1 font-medium">Price</label>
+                    <label className="block mb-1 font-medium text-gray-800 dark:text-base-content">Price</label>
                     <input
                         type="number"
                         name="price"
                         placeholder="Enter price"
-                        className="input input-bordered w-full"
+                        className="input input-bordered w-full dark:bg-base-300 dark:text-base-content dark:border-base-400"
                         required
                     />
                 </div>
 
                 {/* Description */}
                 <div>
-                    <label className="block mb-1 font-medium">Description</label>
+                    <label className="block mb-1 font-medium text-gray-800 dark:text-base-content">Description</label>
                     <textarea
                         name="description"
                         placeholder="Enter service description"
-                        className="textarea textarea-bordered w-full h-24 resize-none"
+                        className="textarea textarea-bordered w-full h-24 resize-none dark:bg-base-300 dark:text-base-content dark:border-base-400"
                         required
                     ></textarea>
                 </div>
 
                 {/* Image URL */}
                 <div>
-                    <label className="block mb-1 font-medium">Image URL</label>
+                    <label className="block mb-1 font-medium text-gray-800 dark:text-base-content">Image URL</label>
                     <input
                         type="text"
                         name="imageUrl"
                         placeholder="Enter image URL"
-                        className="input input-bordered w-full"
+                        className="input input-bordered w-full dark:bg-base-300 dark:text-base-content dark:border-base-400"
                         required
                     />
                 </div>
 
                 {/* Provider Name */}
                 <div>
-                    <label className="block mb-1 font-medium">Provider Name</label>
+                    <label className="block mb-1 font-medium text-gray-800 dark:text-base-content">Provider Name</label>
                     <input
                         type="text"
                         name="providerName"
                         placeholder="Enter provider name"
-                        className="input input-bordered w-full"
+                        className="input input-bordered w-full dark:bg-base-300 dark:text-base-content dark:border-base-400"
                         value={user.displayName}
                     />
                 </div>
 
                 {/* Email */}
                 <div>
-                    <label className="block mb-1 font-medium">Email</label>
+                    <label className="block mb-1 font-medium text-gray-800 dark:text-base-content">Email</label>
                     <input
                         type="email"
                         name="email"
                         placeholder="Enter your email"
-                        className="input input-bordered w-full"
+                        className="input input-bordered w-full dark:bg-base-300 dark:text-base-content dark:border-base-400"
                         value={user.email}
                     />
                 </div>

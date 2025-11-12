@@ -1,7 +1,11 @@
-import React, { useContext, useEffect } from 'react';
+import React, { Suspense, useContext, useEffect } from 'react';
+
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { AuthContext } from '../context/Context';
+import { Loader1 } from './../components/Loader/Loader';
+import Card from "./Card";
+import { Link } from 'react-router-dom';
 
 const AllServices = () => {
     useEffect(() => {
@@ -16,8 +20,6 @@ const AllServices = () => {
     console.log(services);
     return (
         <div>
-
-            <Hero></Hero>
 
             <h1 className='text-center font-bold text-4xl my-5'>Explore Home Service</h1>
 

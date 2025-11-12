@@ -18,7 +18,7 @@ const getLinkStyle = ({ isActive }) => {
 const Navbar = () => {
 
 
-    const { user } = useContext(AuthContext);
+    const { user, theme, toggleTheme } = useContext(AuthContext);
 
     const links = <>
         <li><NavLink to="/" style={getLinkStyle}>Home</NavLink></li>
@@ -75,6 +75,23 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
+                    {/* theme toggle */}
+                    <div className="mr-3">
+                        <label className="swap swap-rotate cursor-pointer">
+                            {/* this hidden checkbox controls the swap */}
+                            <input type="checkbox" onChange={toggleTheme} checked={theme === 'dark'} />
+
+                            {/* moon icon (shown when checked) */}
+                            <svg className="swap-on fill-current w-6 h-6 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M21.64 13a9 9 0 11-9.63-9.63 7 7 0 109.63 9.63z" />
+                            </svg>
+
+                            {/* sun icon (shown when unchecked) */}
+                            <svg className="swap-off fill-current w-6 h-6 text-yellow-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M12 3v2M12 19v2M5 5l1.5 1.5M17.5 17.5L19 19M3 12h2M19 12h2M5 19l1.5-1.5M17.5 6.5L19 5M12 7a5 5 0 100 10 5 5 0 000-10z" />
+                            </svg>
+                        </label>
+                    </div>
                     {
                         !user ?
                             <div className='flex gap-3 pr-5'>

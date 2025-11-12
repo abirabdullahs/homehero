@@ -19,7 +19,7 @@ const Provider = ({ children }) => {
         try {
             const stored = localStorage.getItem('theme');
             if (stored) return stored;
-        } catch (e) {
+        } catch {
             // ignore
         }
         if (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -63,7 +63,7 @@ const Provider = ({ children }) => {
                 document.documentElement.setAttribute('data-theme', theme);
             }
             localStorage.setItem('theme', theme);
-        } catch (e) {
+        } catch {
             // ignore
         }
     }, [theme]);
