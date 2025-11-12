@@ -93,7 +93,7 @@ const MyServices = () => {
       <h2 className="text-2xl font-bold mb-6 text-center">My Services</h2>
 
 
-      <div className="overflow-x-auto rounded-2xl border border-gray-200 shadow-md">
+      <div className="overflow-x-auto rounded-2xl border border-gray-200 shadow-md mb-10">
         <table className="table w-full">
           <thead className="bg-gray-100 text-gray-700 font-semibold">
             <tr>
