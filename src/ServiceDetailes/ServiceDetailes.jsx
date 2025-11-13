@@ -259,8 +259,7 @@ const ServiceDetails = () => {
                                                 {new Date(review.createdAt).toLocaleDateString('en-US', { 
                                                     year: 'numeric', 
                                                     month: 'short', 
-                                                    day: 'numeric' 
-                                                    
+                                                    day: 'numeric'    
                                                 })}
                                             </span>
                                         </div>
