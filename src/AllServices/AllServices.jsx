@@ -7,11 +7,11 @@ import Card from "./Card";
 import axios from 'axios';
 
 const AllServices = () => {
-  const { services } = useContext(AuthContext);
+  const { services, loading } = useContext(AuthContext);
   const [filteredServices, setFilteredServices] = useState([]);
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [filterLoading, setFilterLoading] = useState(false);
 
   useEffect(() => {
     AOS.init({ duration: 800, once: false, easing: 'ease-in-out' });
@@ -23,7 +23,7 @@ const AllServices = () => {
   }, [services]);
 
   const handleFilter = async () => {
-    setLoading(true);
+    setFilterLoading(true);
     try {
       const res = await axios.get(`${import.meta.env.VITE_SERVER}/services`, {
         params: { 
@@ -35,7 +35,7 @@ const AllServices = () => {
     } catch (err) {
       console.error(err);
     }
-    setLoading(false);
+    setFilterLoading(false);
   };
 
   return (
@@ -73,25 +73,31 @@ const AllServices = () => {
       </div>
 
       {/* Services Grid */}
-      <Suspense fallback={<Loader1 />}>
-        {loading ? (
-          <div className="text-center font-semibold text-lg">Loading...</div>
-        ) : (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {filteredServices.length === 0 ? (
-              <div className="col-span-full text-center text-gray-500 font-medium py-10">
-                No services found in this price range.
-              </div>
-            ) : (
-              filteredServices.map((skill, index) => (
-                <div key={skill._id} data-aos="zoom-in" data-aos-delay={index * 100}>
-                  <Card skill={skill} />
+      {loading && filteredServices.length === 0 ? (
+        <div className="min-h-[50vh] flex items-center justify-center">
+          <Loader1 />
+        </div>
+      ) : (
+        <Suspense fallback={<Loader1 />}>
+          {filterLoading ? (
+            <div className="text-center font-semibold text-lg">Loading filtered services...</div>
+          ) : (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {filteredServices.length === 0 ? (
+                <div className="col-span-full text-center text-gray-500 font-medium py-10">
+                  No services found in this price range.
                 </div>
-              ))
-            )}
-          </div>
-        )}
-      </Suspense>
+              ) : (
+                filteredServices.map((skill, index) => (
+                  <div key={skill._id} data-aos="zoom-in" data-aos-delay={index * 100}>
+                    <Card skill={skill} />
+                  </div>
+                ))
+              )}
+            </div>
+          )}
+        </Suspense>
+      )}
     </div>
   );
 };

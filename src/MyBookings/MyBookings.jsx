@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/Context';
+import { Loader1 } from '../components/Loader/Loader';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import toast from 'react-hot-toast';
@@ -7,10 +8,9 @@ import toast from 'react-hot-toast';
 const MyBookings = () => {
 
 
-    const { user } = useContext(AuthContext);
+    const { user, services, fetchBookingsByEmail } = useContext(AuthContext);
     const [bookings, setBookings] = useState([]);
-
-    const { services } = useContext(AuthContext);
+    const [loading, setLoading] = useState(true); // Local loading state
 
 
     const handleCancel = async (id) => {
@@ -75,22 +75,41 @@ const MyBookings = () => {
 
     }
 
-    useEffect(() => {
 
+    useEffect(() => {
+        let mounted = true;
         if (!user?.email) return;
 
-        const fetchBookingsByEmail = async () => {
+        const load = async () => {
+            setLoading(true);
             try {
-                const res = await axios.get(`${import.meta.env.VITE_SERVER}/bookings/${user.email}`);
-                setBookings(res.data || []);
+                const data = await fetchBookingsByEmail(user.email);
+                if (mounted) setBookings(data || []);
             } catch (error) {
                 console.error("Error fetching bookings:", error);
+                if (mounted) setBookings([]);
+            } finally {
+                if (mounted) setLoading(false);
             }
         };
 
-        fetchBookingsByEmail();
+        load();
+
+        return () => {
+            mounted = false;
+        };
+        // fetchBookingsByEmail is a stable reference from context, safe to omit from deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user?.email]);
 
+
+    if (loading) {
+        return (
+            <div className="min-h-[40vh] flex items-center justify-center">
+                <Loader1 />
+            </div>
+        );
+    }
 
     return (
         <div>
@@ -108,18 +127,16 @@ const MyBookings = () => {
                     </thead>
 
                     <tbody>
-
-
-                        {
+                        {bookings && bookings.length > 0 ? (
                             bookings.map((b, index) => {
-                                const serviceInfo = services.find(s => s._id === b.serviceId);
+                                const serviceInfo = services?.find(s => s._id === b.serviceId);
 
                                 return (
                                     <tr key={b._id} className="hover:bg-gray-50 transition duration-150">
                                         <td>{index + 1}</td>
-                                        <td className="font-medium">{serviceInfo?.serviceName}</td>
-                                        <td>{serviceInfo?.category}</td>
-                                        <td>{serviceInfo?.price}</td>
+                                        <td className="font-medium">{serviceInfo?.serviceName || "N/A"}</td>
+                                        <td>{serviceInfo?.category || "N/A"}</td>
+                                        <td>{serviceInfo?.price || "N/A"}</td>
                                         <td>
                                             <div className="flex justify-center gap-2">
                                                 <button className="btn-danger-custom btn-sm" onClick={() => handleCancel(b._id)}>Cancel</button>
@@ -132,30 +149,34 @@ const MyBookings = () => {
                                     </tr>
                                 );
                             })
-                        }
-
-
+                        ) : (
+                            <tr>
+                                <td colSpan="5" className="text-center py-6 text-base-content/60">
+                                    No bookings found
+                                </td>
+                            </tr>
+                        )}
                     </tbody>
                 </table>
             </div>
 
             {/* Mobile: stacked bookings */}
             <div className="md:hidden space-y-4">
-                {bookings.length === 0 ? (
+                {!bookings || bookings.length === 0 ? (
                     <div className="p-4 bg-base-100 border border-base-300 rounded-lg text-center text-base-content/70">No bookings found.</div>
                 ) : (
                     bookings.map((b, idx) => {
-                        const serviceInfo = services.find(s => s._id === b.serviceId);
+                        const serviceInfo = services?.find(s => s._id === b.serviceId);
                         return (
                             <div key={b._id} className="p-4 bg-base-100 border border-base-300 rounded-lg shadow-sm">
                                 <div className="flex items-start justify-between">
                                     <div>
                                         <div className="text-sm text-base-content/70">#{idx + 1}</div>
-                                        <h3 className="font-semibold text-base-content">{serviceInfo?.serviceName}</h3>
-                                        <div className="text-sm text-base-content/60">{serviceInfo?.category}</div>
+                                        <h3 className="font-semibold text-base-content">{serviceInfo?.serviceName || "Service"}</h3>
+                                        <div className="text-sm text-base-content/60">{serviceInfo?.category || "N/A"}</div>
                                     </div>
                                     <div className="text-right">
-                                        <div className="text-primary font-semibold">৳ {serviceInfo?.price}</div>
+                                        <div className="text-primary font-semibold">৳ {serviceInfo?.price || "N/A"}</div>
                                     </div>
                                 </div>
                                 <div className="mt-3 flex gap-2">

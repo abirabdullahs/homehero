@@ -4,6 +4,7 @@ import { AuthContext } from "../context/Context";
 import { toast } from "react-toastify";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { Loader1 } from "../components/Loader/Loader";
 
 const ServiceDetails = () => {
 
@@ -13,7 +14,7 @@ const ServiceDetails = () => {
 
 
     const { id } = useParams();
-    const { user, services } = useContext(AuthContext);
+    const { user, services, fetchBookingsByEmail } = useContext(AuthContext);
 
     const [service, setService] = useState([]);
     const [bookings, setBookings] = useState([]);
@@ -40,20 +41,22 @@ const ServiceDetails = () => {
     useEffect(() => {
         if (!user) return;
 
-        const fetchBookings = async () => {
+        let mounted = true;
+        const load = async () => {
             try {
-                const res = await axios.get(`${import.meta.env.VITE_SERVER}/bookings/${user.email}`);
-                console.log(res);
-
-                if (res.data) setBookings(res.data)
-
+                const data = await fetchBookingsByEmail(user.email);
+                if (mounted) setBookings(data || []);
             } catch (err) {
                 console.error("Error fetching bookings:", err);
             }
         };
 
-        fetchBookings();
-    }, [user])
+        load();
+
+        return () => {
+            mounted = false;
+        };
+    }, [user, fetchBookingsByEmail]);
 
 
     useEffect(() => {

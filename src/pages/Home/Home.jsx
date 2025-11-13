@@ -19,12 +19,21 @@ const Home = () => {
         });
     }, []);
 
-    const { services } = useContext(AuthContext);
+    const { services, loading } = useContext(AuthContext);
     console.log(services);
 
 
 
     const Navigate = useNavigate();
+
+    if (loading && (!services || services.length === 0)) {
+        return (
+            <div className="min-h-[40vh] flex items-center justify-center">
+                <Loader1 />
+            </div>
+        );
+    }
+
     return (
         <div>
 

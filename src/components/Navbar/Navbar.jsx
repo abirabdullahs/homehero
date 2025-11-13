@@ -49,7 +49,7 @@ const Navbar = () => {
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
+            confirmButtonText: "Yes, log out!"
         }).then((result) => {
             if (result.isConfirmed) {
                 signOut(auth)
@@ -61,7 +61,7 @@ const Navbar = () => {
                         toast(err);
                     })
                 Swal.fire({
-                    title: "Deleted!",
+                    title: "logged  out",
                     text: "Your file has been deleted.",
                     icon: "success"
                 });

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/Context";
+import { Loader1 } from "../../components/Loader/Loader";
 import axios from "axios";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
@@ -7,18 +8,32 @@ import toast from "react-hot-toast";
 const MyServices = () => {
     const [myServices, setMyServices] = useState([]);
     const [editingService, setEditingService] = useState(null);
+    const [loading, setLoading] = useState(true); // Local loading state
 
-    const { user } = useContext(AuthContext);
+    const { user, fetchServicesByEmail } = useContext(AuthContext);
 
 
     useEffect(() => {
-        if (user?.email) {
-            axios
-                .get(`${import.meta.env.VITE_SERVER}/services/${user.email}`)
-                .then((res) => setMyServices(res.data))
-                .catch((err) => console.log(err));
-        }
-    }, [user]);
+        let mounted = true;
+        const load = async () => {
+            if (!user?.email) return;
+            setLoading(true);
+            try {
+                const data = await fetchServicesByEmail(user.email);
+                if (mounted) setMyServices(data || []);
+            } catch (err) {
+                console.error(err);
+            } finally {
+                if (mounted) setLoading(false);
+            }
+        };
+
+        load();
+
+        return () => {
+            mounted = false;
+        };
+    }, [user?.email, fetchServicesByEmail]);
 
 
     const handleDelete = async (id) => {
@@ -130,6 +145,14 @@ const MyServices = () => {
         }
     };
 
+
+    if (loading) {
+        return (
+            <div className="min-h-[40vh] flex items-center justify-center">
+                <Loader1 />
+            </div>
+        );
+    }
 
     return (
         <div className="max-w-full sm:max-w-5xl mx-auto mt-10">
