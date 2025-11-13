@@ -72,7 +72,7 @@ const Navbar = () => {
 
     return (
         <div>
-            {/* full-bleed background wrapper; inner .navbar constrained to match page width */}
+           
             <div className="w-full bg-base-100 shadow-sm mb-1">
                 <div className="navbar w-full max-w-full sm:max-w-7xl mx-auto px-4">
                 <div className="navbar-start">
@@ -90,12 +90,12 @@ const Navbar = () => {
                     </div>
                     <a className="btn btn-ghost text-2xl font-bold flex items-center gap-2 px-0 hover:bg-transparent">
                         <div className="flex items-center justify-center leading-none select-none">
-                            {/* Main Logo Text */}
+                   
                             <span className="text-2xl font-extrabold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
                                 Home
                             </span>
 
-                            {/* Sub Text */}
+                      
                             <span className="text-xs font-semibold text-base-content/70 mt-1">
                                 Hero
                             </span>

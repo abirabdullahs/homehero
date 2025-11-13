@@ -13,9 +13,9 @@ const Provider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [services, setServices] = useState([]);
     const [bookings, setBookings] = useState([]);
-    const [authLoading, setAuthLoading] = useState(true); // Auth state loading
-    const [loading, setLoading] = useState(false); // Data loading
-    // theme: 'light' | 'dark' - persisted in localStorage
+    const [authLoading, setAuthLoading] = useState(true); 
+    const [loading, setLoading] = useState(false); 
+    
     const [theme, setTheme] = useState(() => {
         try {
             const stored = localStorage.getItem('theme');
@@ -48,7 +48,7 @@ const Provider = ({ children }) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
-            setAuthLoading(false); // Auth check is done
+            setAuthLoading(false); 
         })
 
         return (() => {
@@ -76,7 +76,7 @@ const Provider = ({ children }) => {
 
 
 
-    // API fetch function
+    
     const fetchServices = async () => {
         try {
             setLoading(true);
@@ -101,8 +101,6 @@ const Provider = ({ children }) => {
         }
     };
 
-    // fetch services for a specific provider (by email)
-    // Does NOT manipulate global loading state - let caller manage their own loading
     const fetchServicesByEmail = async (email) => {
         if (!email) return [];
         try {
@@ -114,8 +112,7 @@ const Provider = ({ children }) => {
         }
     };
 
-    // fetch bookings for a specific user by email
-    // Does NOT manipulate global loading state - let caller manage their own loading
+   
     const fetchBookingsByEmail = async (email) => {
         if (!email) return [];
         try {
@@ -133,7 +130,8 @@ const Provider = ({ children }) => {
    
 
 
-    // component mount এ fetch
+   
+    
     useEffect(() => {
         fetchServices();
     }, []);
@@ -153,8 +151,8 @@ const Provider = ({ children }) => {
         signInUser,
         googleUser,
         user,
-        authLoading, // Use authLoading for PrivateRoute, not data loading
-        loading, // Data loading state
+        authLoading, 
+        loading, 
         theme,
         toggleTheme,
         setLoading,

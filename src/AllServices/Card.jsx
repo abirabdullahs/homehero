@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Card = ({ skill }) => {
-  // Round avgRating to 1 decimal
+ 
   const avgRating = skill.avgRating ? skill.avgRating.toFixed(1) : "0.0";
 
   return (

@@ -47,7 +47,6 @@ const AddService = () => {
             <h2 className="text-2xl font-bold mb-6 text-center text-base-content">Add New Service</h2>
             <form className="space-y-4" onSubmit={handleSubmit}>
 
-                {/* Service Name */}
                 <div>
                     <label className="block mb-1 font-medium text-base-content">Service Name</label>
                     <input
@@ -59,7 +58,7 @@ const AddService = () => {
                     />
                 </div>
 
-                {/* Category */}
+     
                 <div>
                     <label className="block mb-1 font-medium text-base-content">Category</label>
                     <input
@@ -71,7 +70,7 @@ const AddService = () => {
                     />
                 </div>
 
-                {/* Price */}
+       
                 <div>
                     <label className="block mb-1 font-medium text-base-content">Price</label>
                     <input
@@ -83,7 +82,7 @@ const AddService = () => {
                     />
                 </div>
 
-                {/* Description */}
+          
                 <div>
                     <label className="block mb-1 font-medium text-base-content">Description</label>
                     <textarea
@@ -94,7 +93,7 @@ const AddService = () => {
                     ></textarea>
                 </div>
 
-                {/* Image URL */}
+       
                 <div>
                     <label className="block mb-1 font-medium text-base-content">Image URL</label>
                     <input
@@ -106,7 +105,6 @@ const AddService = () => {
                     />
                 </div>
 
-                {/* Provider Name */}
                 <div>
                     <label className="block mb-1 font-medium text-base-content">Provider Name</label>
                     <input
@@ -118,7 +116,7 @@ const AddService = () => {
                     />
                 </div>
 
-                {/* Email */}
+        
                 <div>
                     <label className="block mb-1 font-medium text-base-content">Email</label>
                     <input
@@ -130,7 +128,7 @@ const AddService = () => {
                     />
                 </div>
 
-                {/* Submit Button */}
+          
                 <button
                     type="submit"
                     className="btn-primary-custom w-full mt-4"

@@ -16,7 +16,7 @@ const Profile = () => {
         if (!user) {
             Navigate("/login");
         } else {
-            // Load custom profile data from localStorage
+            
             const stored = localStorage.getItem(`userProfile_${user.email}`);
             if (stored) {
                 try {

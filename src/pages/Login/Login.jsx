@@ -115,10 +115,10 @@ const Login = () => {
               </fieldset>
             </form>
 
-            {/* Divider */}
+        
             <div className="divider dark:divide-base-300">OR</div>
 
-            {/* Google Login Button */}
+     
             <button
               onClick={handleGoogleSignIn}
               className="flex items-center justify-center gap-2 w-full bg-white dark:bg-base-200 text-gray-800 dark:text-base-content border border-gray-300 dark:border-base-300 rounded-lg px-4 py-2 hover:bg-gray-50 dark:hover:bg-base-300 hover:shadow-lg transition-all duration-200 active:scale-[0.98]"

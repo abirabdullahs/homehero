@@ -25,6 +25,12 @@ const Footer = () => {
                     <a className="link link-hover text-base-content hover:text-primary">Cookie policy</a>
                 </nav>
             </footer>
+
+            <div className="w-full bg-base-200 border-t border-base-300 py-4">
+                <div className="max-w-full sm:max-w-7xl mx-auto text-center text-sm text-base-content/70">
+                    Developed by <a href="https://abirabdullah.me" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Abir Abdullah</a>
+                </div>
+            </div>
         </div>
     );
 };

@@ -8,8 +8,7 @@ import toast from "react-hot-toast";
 const MyServices = () => {
     const [myServices, setMyServices] = useState([]);
     const [editingService, setEditingService] = useState(null);
-    const [loading, setLoading] = useState(true); // Local loading state
-
+    const [loading, setLoading] = useState(true); 
     const { user, fetchServicesByEmail } = useContext(AuthContext);
 
 
@@ -93,7 +92,7 @@ const MyServices = () => {
 
     const handleUpdate = async (e) => {
         e.preventDefault();
-        // prefer id from formData (set on edit) and fall back to editingService
+        
         const id = formData?._id || editingService?._id;
         if (!id) {
             toast.error("No service selected for update.");
@@ -102,7 +101,7 @@ const MyServices = () => {
 
         const updatedService = { ...formData, price: Number(formData.price) };
 
-        // remove _id from payload because MongoDB _id is immutable and will cause a 500
+       
         const payload = { ...updatedService };
         if (payload._id) delete payload._id;
 
@@ -112,14 +111,14 @@ const MyServices = () => {
                 payload
             );
 
-            // be flexible about success shape: some servers return modifiedCount, others return acknowledged or the updated object
+          
             const success =
                 (res?.data && res.data.modifiedCount > 0) ||
                 res?.status === 200 ||
                 (res?.data && (res.data.acknowledged || res.data.updatedCount > 0));
 
             if (success) {
-                // try to pick the updated object returned by server, otherwise use what we sent
+                
                 const updatedObj = res?.data?.updatedService || updatedService;
 
                 setMyServices((prev) =>
@@ -159,7 +158,7 @@ const MyServices = () => {
             <h2 className="text-2xl font-bold mb-6 text-center">My Services</h2>
 
 
-            {/* Desktop/tablet: table view */}
+
             <div className="hidden md:block overflow-x-auto rounded-2xl border border-base-300 shadow-md mb-10">
                 <table className="table w-full">
                     <thead className="bg-base-200 text-base-content font-semibold">
@@ -212,7 +211,7 @@ const MyServices = () => {
                 </table>
             </div>
 
-            {/* Mobile: stacked cards */}
+ 
             <div className="md:hidden space-y-4">
                 {myServices.length === 0 ? (
                     <div className="p-4 bg-base-100 border border-base-300 rounded-lg text-center text-base-content/70">No services found 😔</div>

@@ -115,12 +115,12 @@ const ServiceDetails = () => {
     return (
         <div className="min-h-screen bg-base-100 py-8 px-4">
             <div className="max-w-full sm:max-w-6xl mx-auto">
-                {/* ✅ Main Grid Layout */}
+               
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
-                    {/* ✅ LEFT SIDE: SERVICE DETAILS */}
+                    
                     <div className="lg:col-span-2">
-                        {/* Service Image */}
+                    
                         <div className="bg-base-100 rounded-2xl shadow-lg overflow-hidden border border-base-300 mb-6">
                             {service?.imageUrl && (
                                 <img
@@ -131,7 +131,7 @@ const ServiceDetails = () => {
                             )}
                         </div>
 
-                        {/* Service Title & Description */}
+                       
                         <div className="bg-base-100 rounded-2xl shadow-lg p-8 border border-base-300 mb-6">
                             <h1 className="text-4xl font-bold text-base-content mb-4">
                                 {service?.serviceName}
@@ -145,7 +145,7 @@ const ServiceDetails = () => {
                                 {service?.description}
                             </p>
 
-                            {/* Price & Rating */}
+                         
                             <div className="flex items-center gap-8 py-6 border-t border-b border-base-300">
                                 <div>
                                     <p className="text-sm text-base-content/60 mb-2">Price</p>
@@ -176,7 +176,7 @@ const ServiceDetails = () => {
                                 </div>
                             </div>
 
-                            {/* Booking Button */}
+                          
                             <div className="mt-8">
                                 {!own && !booked && (
                                     <button
@@ -190,7 +190,7 @@ const ServiceDetails = () => {
                                 {booked && (
                                     <div className="bg-green-500/20 border-2 border-green-500 rounded-xl p-4 text-center">
                                         <p className="text-green-600 font-bold text-lg">
-                                            ✅ You have already booked this service
+                                             You have already booked this service
                                         </p>
                                     </div>
                                 )}
@@ -323,7 +323,7 @@ const ServiceDetails = () => {
                             Book This Service
                         </h2>
 
-                        {/* ✅ Booking Form */}
+                        {/*  Booking Form */}
                         <form onSubmit={handleBookingSubmit} className="space-y-4">
                             <div>
                                 <label className="block text-sm font-medium text-base-content mb-1">

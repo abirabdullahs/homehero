@@ -10,16 +10,16 @@ const HeroBanner = ({
 }) => {
   return (
     <section className="relative w-full h-[600px] sm:h-[650px] md:h-[700px] lg:h-[750px] overflow-hidden">
-      {/* Background Image */}
+      
       <div
         className="absolute inset-0 bg-cover bg-center transform transition-transform duration-700 hover:scale-105"
         style={{ backgroundImage: `url(${imageUrl})` }}
       ></div>
 
-      {/* Overlay */}
+   
       <div className="absolute inset-0 bg-linear-to-b from-black/50 via-black/30 to-black/50"></div>
 
-      {/* Content */}
+
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6">
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4 animate-fadeInDown">
           {title}
@@ -44,7 +44,7 @@ const HeroBanner = ({
         )}
       </div>
 
-      {/* Optional Decorative Shapes */}
+      
       <div className="absolute bottom-0 left-0 w-full h-24 bg-linear-to-t from-white/0 to-white/20 pointer-events-none"></div>
     </section>
   );

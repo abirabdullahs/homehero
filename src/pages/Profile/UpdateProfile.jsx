@@ -43,13 +43,13 @@ const UpdateProfile = () => {
         }
 
         try {
-            // Update Firebase Auth profile
+            
             await updateProfile(auth.currentUser, {
                 displayName: editUser.displayName,
                 photoURL: editUser.photoURL,
             });
 
-            // Save custom fields to localStorage
+            
             const userCustomData = {
                 email: auth.currentUser.email,
                 number: editUser.number,

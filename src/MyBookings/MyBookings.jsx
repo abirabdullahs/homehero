@@ -12,7 +12,6 @@ const MyBookings = () => {
   const [rating, setRating] = useState(0);
   const [currentServiceId, setCurrentServiceId] = useState(null);
 
-  // -------- Fetch Bookings ----------
   useEffect(() => {
     let mounted = true;
     if (!user?.email) return;
@@ -34,7 +33,6 @@ const MyBookings = () => {
     return () => (mounted = false);
   }, [user?.email, fetchBookingsByEmail]);
 
-  // -------- Cancel Booking ----------
   const handleCancel = async (id) => {
     const confirm = await Swal.fire({
       title: "Are you sure?",
@@ -58,7 +56,7 @@ const MyBookings = () => {
     }
   };
 
-  // -------- Review Handling ----------
+
   const handleChange = (e) => setRating(parseInt(e.target.value, 10));
 
   const handleReview = async (e, id) => {
@@ -96,7 +94,7 @@ const MyBookings = () => {
 
   return (
     <div>
-      {/* -------- Table for Desktop -------- */}
+    
       <div className="hidden md:block overflow-x-auto rounded-2xl border border-base-300 shadow-md mb-10">
         <table className="table w-full">
           <thead className="bg-base-200 text-base-content font-semibold">
@@ -160,7 +158,7 @@ const MyBookings = () => {
         </table>
       </div>
 
-      {/* -------- Mobile Cards -------- */}
+   
       <div className="md:hidden space-y-4">
         {!bookings || bookings.length === 0 ? (
           <div className="p-4 bg-base-100 border border-base-300 rounded-lg text-center text-base-content/70">
@@ -215,7 +213,7 @@ const MyBookings = () => {
         )}
       </div>
 
-      {/* -------- Review Modal -------- */}
+     
       <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
           <h2 className="text-2xl font-semibold text-base-content mb-4">

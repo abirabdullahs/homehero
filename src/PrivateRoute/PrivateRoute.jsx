@@ -1,4 +1,4 @@
-// PrivateRoute.jsx
+
 import { Navigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from './../context/Context';
@@ -6,7 +6,7 @@ import { AuthContext } from './../context/Context';
 const PrivateRoute = ({ children }) => {
   const { user, authLoading } = useContext(AuthContext);
 
-  // Auth state is being checked from Firebase
+ 
   if (authLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen">

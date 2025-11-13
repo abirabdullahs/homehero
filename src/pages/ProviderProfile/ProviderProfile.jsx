@@ -16,27 +16,27 @@ const ProviderProfile = () => {
         const fetchProviderData = async () => {
             setLoading(true);
             try {
-                // Decode email if it was encoded in URL
+                
                 const decodedEmail = decodeURIComponent(email);
 
-                // Fetch services by this provider
+                
                 const servicesRes = await axios.get(
                     `${import.meta.env.VITE_SERVER}/services/${decodedEmail}`
                 );
                 setServices(servicesRes.data || []);
 
-                // Fetch all bookings to filter by provider's services
+                
                 const bookingsRes = await axios.get(
                     `${import.meta.env.VITE_SERVER}/bookings`
                 );
                 
-                // Filter bookings that match this provider's services
+               
                 const providerBookings = bookingsRes.data.filter(booking =>
                     servicesRes.data?.some(service => service._id === booking.serviceId)
                 );
                 setBookings(providerBookings || []);
 
-                // Set provider data
+              
                 if (servicesRes.data?.length > 0) {
                     const firstService = servicesRes.data[0];
                     setProviderData({
@@ -80,7 +80,6 @@ const ProviderProfile = () => {
         );
     }
 
-    // Calculate analytics
     const totalServices = services.length;
     const totalBookings = bookings.length;
     const totalRevenue = bookings.reduce((sum, booking) => sum + (parseFloat(booking.price) || 0), 0);
@@ -88,7 +87,7 @@ const ProviderProfile = () => {
         ? (services.reduce((sum, service) => sum + (service.avgRating || 0), 0) / services.length).toFixed(1)
         : 0;
 
-    // Data for charts
+
     const categoryData = services.reduce((acc, service) => {
         const existing = acc.find(item => item.name === service.category);
         if (existing) {
@@ -129,7 +128,7 @@ const ProviderProfile = () => {
     return (
         <div className="min-h-screen bg-base-100 py-8 px-4">
             <div className="max-w-full sm:max-w-7xl mx-auto">
-                {/* Header */}
+          
                 <div className="mb-10">
                     <button 
                         onClick={() => navigate(-1)}
@@ -151,7 +150,7 @@ const ProviderProfile = () => {
                     </div>
                 </div>
 
-                {/* Key Metrics */}
+                
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
                     <div className="bg-linear-to-br from-blue-500/10 to-blue-600/10 rounded-xl p-6 border border-blue-300/30">
                         <p className="text-base-content/70 text-sm font-medium mb-2">Total Services</p>
@@ -190,9 +189,9 @@ const ProviderProfile = () => {
                     </div>
                 </div>
 
-                {/* Charts Grid */}
+              
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
-                    {/* Category Distribution Pie Chart */}
+                
                     <div className="bg-base-100 rounded-2xl shadow-lg p-6 border border-base-300">
                         <h3 className="text-xl font-bold text-base-content mb-6">Services by Category</h3>
                         {categoryData.length > 0 ? (
@@ -220,7 +219,6 @@ const ProviderProfile = () => {
                         )}
                     </div>
 
-                    {/* Price Range Bar Chart */}
                     <div className="bg-base-100 rounded-2xl shadow-lg p-6 border border-base-300">
                         <h3 className="text-xl font-bold text-base-content mb-6">Services by Price Range</h3>
                         {priceRangeData.some(item => item.value > 0) ? (
@@ -238,7 +236,7 @@ const ProviderProfile = () => {
                         )}
                     </div>
 
-                    {/* Rating Distribution */}
+                
                     <div className="bg-base-100 rounded-2xl shadow-lg p-6 border border-base-300">
                         <h3 className="text-xl font-bold text-base-content mb-6">Rating Distribution</h3>
                         {ratingDistribution.length > 0 ? (
