@@ -1,6 +1,6 @@
 # HomeHero
 
-Live site: https://your-live-site-url.example/  <!-- Replace with the actual URL -->
+Live site: https://homehero-9706a.web.app  <!-- Replace with the actual URL -->
 
 ## Key Features
 
