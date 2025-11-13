@@ -60,7 +60,7 @@ const UpdateProfile = () => {
 
     return (
         <div className='flex justify-center p-20'>
-            <form onSubmit={handleSubmit} className="space-y-4 w-full max-w-2xl p-5 shadow-md rounded bg-base-100 border border-base-300">
+            <form onSubmit={handleSubmit} className="space-y-4 w-full max-w-full sm:max-w-2xl p-5 shadow-md rounded bg-base-100 border border-base-300">
                 
                 <div>
                     <label className="block mb-1 font-medium text-base-content">Profile Image URL</label>

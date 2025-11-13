@@ -110,7 +110,7 @@ const ServiceDetails = () => {
 
     return (
         <div className="min-h-screen bg-base-100 py-8 px-4">
-            <div className="max-w-6xl mx-auto">
+            <div className="max-w-full sm:max-w-6xl mx-auto">
                 {/* ✅ Main Grid Layout */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 

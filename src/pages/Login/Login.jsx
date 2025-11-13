@@ -57,7 +57,7 @@ const Login = () => {
           <p className="py-2 text-gray-500 dark:text-gray-300">Welcome back! Please login to continue.</p>
         </div>
 
-        <div className="card bg-base-100 w-full max-w-sm shadow-2xl">
+  <div className="card bg-base-100 w-full max-w-full sm:max-w-sm shadow-2xl">
           <div className="card-body">
             <form onSubmit={handleLogin}>
               <fieldset className="fieldset">

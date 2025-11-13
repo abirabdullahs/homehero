@@ -22,7 +22,7 @@ const Profile = () => {
 
     return (
         <div>
-            <div className="max-w-sm mx-auto bg-white dark:bg-base-200 rounded-xl shadow-lg overflow-hidden p-6 text-center my-5">
+            <div className="max-w-full sm:max-w-sm mx-auto bg-white dark:bg-base-200 rounded-xl shadow-lg overflow-hidden p-6 text-center my-5">
             
                 <img
                     className="w-24 h-24 rounded-full mx-auto border-4 border-primary object-cover"

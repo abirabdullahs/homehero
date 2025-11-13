@@ -141,7 +141,7 @@ const MyBookings = () => {
 
             <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
                 <div className="modal-box">
-                    <div className="max-w-md mx-auto bg-white dark:bg-gray-800 shadow-lg rounded-xl p-6">
+                    <div className="max-w-full sm:max-w-md mx-auto bg-white dark:bg-gray-800 shadow-lg rounded-xl p-6">
                         <h2 className="text-2xl font-semibold text-gray-800 dark:text-white mb-4">
                             Submit Your Review
                         </h2>

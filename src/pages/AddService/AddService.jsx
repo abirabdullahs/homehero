@@ -43,7 +43,7 @@ const AddService = () => {
 
     }
     return (
-        <div className="max-w-2xl mx-auto p-6 bg-base-100 border border-base-300 rounded-lg shadow-md mt-10 mb-10">
+        <div className="max-w-full sm:max-w-2xl mx-auto p-6 bg-base-100 border border-base-300 rounded-lg shadow-md mt-10 mb-10">
             <h2 className="text-2xl font-bold mb-6 text-center text-base-content">Add New Service</h2>
             <form className="space-y-4" onSubmit={handleSubmit}>
 

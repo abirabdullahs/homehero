@@ -24,7 +24,7 @@ const HeroBanner = ({
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4 animate-fadeInDown">
           {title}
         </h1>
-        <p className="text-white text-sm sm:text-base md:text-lg lg:text-xl mb-8 max-w-3xl animate-fadeInUp">
+  <p className="text-white text-sm sm:text-base md:text-lg lg:text-xl mb-8 max-w-full sm:max-w-3xl animate-fadeInUp">
           {subtitle}
         </p>
         {onButtonClick ? (

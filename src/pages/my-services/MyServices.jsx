@@ -132,7 +132,7 @@ const MyServices = () => {
 
 
     return (
-        <div className="max-w-5xl mx-auto mt-10">
+        <div className="max-w-full sm:max-w-5xl mx-auto mt-10">
             <h2 className="text-2xl font-bold mb-6 text-center">My Services</h2>
 
 

@@ -54,7 +54,7 @@ const Home = () => {
                 <h2 className="text-3xl font-bold mb-10 text-center text-base-content">
                     How Our Service Works
                 </h2>
-                <div className="grid md:grid-cols-3 gap-10 text-center max-w-6xl mx-auto px-4">
+                <div className="grid md:grid-cols-3 gap-10 text-center max-w-full sm:max-w-6xl mx-auto px-4">
                     <div
                         className="p-6 bg-base-100 border border-base-300 rounded-xl shadow hover:shadow-lg transition duration-300"
                         data-aos="fade-right"
@@ -92,7 +92,7 @@ const Home = () => {
                 <h2 className="text-3xl font-bold text-center mb-12 text-base-content">
                     What Our Customers Say
                 </h2>
-                <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto px-4">
+                <div className="grid md:grid-cols-3 gap-8 max-w-full sm:max-w-6xl mx-auto px-4">
                     <div className="p-6 bg-base-100 border border-base-300 rounded-xl shadow hover:shadow-lg transition duration-300">
                         <p className="italic text-base-content/70">
                             "The electrician arrived on time and fixed everything quickly. Highly recommend!"
@@ -118,7 +118,7 @@ const Home = () => {
                 <h2 className="text-3xl font-bold text-center mb-12 text-base-content">
                     Why Choose <span className="text-primary">HomeHero</span>?
                 </h2>
-                <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto text-center px-4">
+                <div className="grid md:grid-cols-3 gap-10 max-w-full sm:max-w-6xl mx-auto text-center px-4">
                     <div
                         className="p-6 bg-base-200 border border-base-300 rounded-xl shadow hover:shadow-lg transition duration-300"
                         data-aos="fade-right"
