@@ -94,9 +94,10 @@ const MyBookings = () => {
 
     return (
         <div>
-            <div className="overflow-x-auto rounded-2xl border border-gray-200 shadow-md mb-10">
+            {/* Desktop/tablet: table view */}
+            <div className="hidden md:block overflow-x-auto rounded-2xl border border-base-300 shadow-md mb-10">
                 <table className="table w-full">
-                    <thead className="bg-gray-100 text-gray-700 font-semibold">
+                    <thead className="bg-base-200 text-base-content font-semibold">
                         <tr>
                             <th>#</th>
                             <th>Service Name</th>
@@ -138,17 +139,49 @@ const MyBookings = () => {
                 </table>
             </div>
 
+            {/* Mobile: stacked bookings */}
+            <div className="md:hidden space-y-4">
+                {bookings.length === 0 ? (
+                    <div className="p-4 bg-base-100 border border-base-300 rounded-lg text-center text-base-content/70">No bookings found.</div>
+                ) : (
+                    bookings.map((b, idx) => {
+                        const serviceInfo = services.find(s => s._id === b.serviceId);
+                        return (
+                            <div key={b._id} className="p-4 bg-base-100 border border-base-300 rounded-lg shadow-sm">
+                                <div className="flex items-start justify-between">
+                                    <div>
+                                        <div className="text-sm text-base-content/70">#{idx + 1}</div>
+                                        <h3 className="font-semibold text-base-content">{serviceInfo?.serviceName}</h3>
+                                        <div className="text-sm text-base-content/60">{serviceInfo?.category}</div>
+                                    </div>
+                                    <div className="text-right">
+                                        <div className="text-primary font-semibold">৳ {serviceInfo?.price}</div>
+                                    </div>
+                                </div>
+                                <div className="mt-3 flex gap-2">
+                                    <button className="btn-danger-custom btn-sm flex-1" onClick={() => handleCancel(b._id)}>Cancel</button>
+                                    <button className="btn-primary-custom btn-sm flex-1" onClick={() => {
+                                        setCurrentServiceId(b.serviceId);
+                                        document.getElementById('my_modal_5').showModal();
+                                    }}>Review</button>
+                                </div>
+                            </div>
+                        );
+                    })
+                )}
+            </div>
+
 
             <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
                 <div className="modal-box">
-                    <div className="max-w-full sm:max-w-md mx-auto bg-white dark:bg-gray-800 shadow-lg rounded-xl p-6">
-                        <h2 className="text-2xl font-semibold text-gray-800 dark:text-white mb-4">
+                    <div className="max-w-full sm:max-w-md mx-auto bg-base-100 shadow-lg rounded-xl p-6 border border-base-300">
+                        <h2 className="text-2xl font-semibold text-base-content mb-4">
                             Submit Your Review
                         </h2>
 
                         {/* Rating Input */}
                         <div className="mb-4">
-                            <label className="block text-gray-700 dark:text-gray-200 font-medium mb-2">
+                                <label className="block text-base-content font-medium mb-2">
                                 Your Rating
                             </label>
                             <div className="rating rating-lg mb-4">
@@ -203,11 +236,11 @@ const MyBookings = () => {
                         {/* Review Textarea */}
                         <form onSubmit={(e) => handleReview(e,currentServiceId)}>
                             <div className="mb-4">
-                                <label className="block text-gray-700 dark:text-gray-200 font-medium mb-2">
+                                <label className="block text-base-content font-medium mb-2">
                                     Your Review
                                 </label>
                                 <textarea
-                                    className="w-full p-3 border rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                                    className="w-full p-3 border rounded-lg border-base-300 bg-base-100 text-base-content focus:outline-none focus:ring-2 focus:ring-primary"
                                     rows={4}
                                     placeholder="Write your experience here..."
                                     name='review'

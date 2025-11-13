@@ -136,9 +136,10 @@ const MyServices = () => {
             <h2 className="text-2xl font-bold mb-6 text-center">My Services</h2>
 
 
-            <div className="overflow-x-auto rounded-2xl border border-gray-200 shadow-md mb-10">
+            {/* Desktop/tablet: table view */}
+            <div className="hidden md:block overflow-x-auto rounded-2xl border border-base-300 shadow-md mb-10">
                 <table className="table w-full">
-                    <thead className="bg-gray-100 text-gray-700 font-semibold">
+                    <thead className="bg-base-200 text-base-content font-semibold">
                         <tr>
                             <th>#</th>
                             <th>Service Name</th>
@@ -188,23 +189,49 @@ const MyServices = () => {
                 </table>
             </div>
 
+            {/* Mobile: stacked cards */}
+            <div className="md:hidden space-y-4">
+                {myServices.length === 0 ? (
+                    <div className="p-4 bg-base-100 border border-base-300 rounded-lg text-center text-base-content/70">No services found 😔</div>
+                ) : (
+                    myServices.map((service, index) => (
+                        <div key={service._id} className="p-4 bg-base-100 border border-base-300 rounded-lg shadow-sm">
+                            <div className="flex items-start justify-between">
+                                <div>
+                                    <div className="text-sm text-base-content/70">#{index + 1}</div>
+                                    <h3 className="font-semibold text-base-content">{service.serviceName}</h3>
+                                    <div className="text-sm text-base-content/60">{service.category}</div>
+                                </div>
+                                <div className="text-right">
+                                    <div className="text-primary font-semibold">৳ {service.price}</div>
+                                </div>
+                            </div>
+                            <div className="mt-3 flex gap-2">
+                                <button className="btn-primary-custom btn-sm flex-1" onClick={() => handleEdit(service)}>Edit</button>
+                                <button className="btn-danger-custom btn-sm flex-1" onClick={() => handleDelete(service._id)}>Delete</button>
+                            </div>
+                        </div>
+                    ))
+                )}
+            </div>
+
 
             <dialog id="edit_modal" className="modal modal-bottom sm:modal-middle">
                 <div className="modal-box">
                     <h3 className="font-bold text-lg mb-4 text-center">Edit Service</h3>
                     <form className="space-y-4" onSubmit={handleUpdate}>
-                        <input
-                            type="text"
-                            name="serviceName"
-                            className="input input-bordered w-full"
-                            value={formData.serviceName}
-                            onChange={handleChange}
-                            required
-                        />
+                            <input
+                                type="text"
+                                name="serviceName"
+                                className="input input-bordered w-full bg-base-100 text-base-content border-base-300 focus:outline-none focus:ring-2 focus:ring-primary"
+                                value={formData.serviceName}
+                                onChange={handleChange}
+                                required
+                            />
                         <input
                             type="text"
                             name="category"
-                            className="input input-bordered w-full"
+                            className="input input-bordered w-full bg-base-100 text-base-content border-base-300 focus:outline-none focus:ring-2 focus:ring-primary"
                             value={formData.category}
                             onChange={handleChange}
                             required
@@ -212,21 +239,21 @@ const MyServices = () => {
                         <input
                             type="number"
                             name="price"
-                            className="input input-bordered w-full"
+                            className="input input-bordered w-full bg-base-100 text-base-content border-base-300 focus:outline-none focus:ring-2 focus:ring-primary"
                             value={formData.price}
                             onChange={handleChange}
                             required
                         />
                         <textarea
                             name="description"
-                            className="textarea textarea-bordered w-full h-24 resize-none"
+                            className="textarea textarea-bordered w-full h-24 resize-none bg-base-100 text-base-content border-base-300 focus:outline-none focus:ring-2 focus:ring-primary"
                             value={formData.description}
                             onChange={handleChange}
                         />
                         <input
                             type="text"
                             name="imageUrl"
-                            className="input input-bordered w-full"
+                            className="input input-bordered w-full bg-base-100 text-base-content border-base-300 focus:outline-none focus:ring-2 focus:ring-primary"
                             value={formData.imageUrl}
                             onChange={handleChange}
                         />
