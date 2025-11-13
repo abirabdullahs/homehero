@@ -72,7 +72,9 @@ const Navbar = () => {
 
     return (
         <div>
-            <div className="navbar w-7xl bg-base-100 shadow-sm mx-auto mb-1">
+            {/* full-bleed background wrapper; inner .navbar constrained to match page width */}
+            <div className="w-full bg-base-100 shadow-sm mb-1">
+                <div className="navbar w-full max-w-full sm:max-w-7xl mx-auto px-4">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -133,6 +135,7 @@ const Navbar = () => {
                     }
                 </div>
             </div>
+        </div>
         </div>
     );
 };
