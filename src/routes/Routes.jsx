@@ -14,6 +14,7 @@ import ServiceDetails from '../ServiceDetailes/ServiceDetailes';
 import PrivateRoute from './../PrivateRoute/PrivateRoute';
 import MyBookings from './../MyBookings/MyBookings';
 import AllServices from './../AllServices/AllServices';
+import ProviderProfile from '../pages/ProviderProfile/ProviderProfile';
 
 
 export const router = createBrowserRouter([
@@ -96,7 +97,11 @@ export const router = createBrowserRouter([
             <MyBookings></MyBookings>
           </PrivateRoute>
         )
-      }
+        },
+        {
+          path: 'provider/:email',
+          Component: ProviderProfile
+        }
     ]
   },
 ]);

@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/Context";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -15,6 +15,7 @@ const ServiceDetails = () => {
 
     const { id } = useParams();
     const { user, services, fetchBookingsByEmail } = useContext(AuthContext);
+        const navigate = useNavigate();
 
     const [service, setService] = useState([]);
     const [bookings, setBookings] = useState([]);
@@ -212,7 +213,12 @@ const ServiceDetails = () => {
                                     <span className="text-3xl">👤</span>
                                 </div>
                                 <div>
-                                    <p className="text-xl font-bold text-base-content">{service?.name}</p>
+                                        <button
+                                            onClick={() => navigate(`/provider/${encodeURIComponent(service?.email)}`)}
+                                            className="text-xl font-bold text-primary hover:text-primary/80 hover:underline transition text-left"
+                                        >
+                                            {service?.name}
+                                        </button>
                                     <p className="text-base-content/60">{service?.email}</p>
                                 </div>
                             </div>

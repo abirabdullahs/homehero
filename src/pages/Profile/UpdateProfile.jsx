@@ -43,13 +43,21 @@ const UpdateProfile = () => {
         }
 
         try {
-            
+            // Update Firebase Auth profile
             await updateProfile(auth.currentUser, {
                 displayName: editUser.displayName,
                 photoURL: editUser.photoURL,
             });
 
-           
+            // Save custom fields to localStorage
+            const userCustomData = {
+                email: auth.currentUser.email,
+                number: editUser.number,
+                institute: editUser.institute,
+                displayName: editUser.displayName,
+                photoURL: editUser.photoURL,
+            };
+            localStorage.setItem(`userProfile_${auth.currentUser.email}`, JSON.stringify(userCustomData));
 
             toast.success("Profile updated successfully!");
             navigate("/profile");

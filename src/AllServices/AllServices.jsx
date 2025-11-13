@@ -4,72 +4,132 @@ import 'aos/dist/aos.css';
 import { AuthContext } from '../context/Context';
 import { Loader1 } from './../components/Loader/Loader';
 import Card from "./Card";
-import axios from 'axios';
 
 const AllServices = () => {
   const { services, loading } = useContext(AuthContext);
   const [filteredServices, setFilteredServices] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
-  const [filterLoading, setFilterLoading] = useState(false);
+
+  // Extract unique categories from services
+  const categories = [...new Set(services.map(s => s.category).filter(Boolean))];
 
   useEffect(() => {
     AOS.init({ duration: 800, once: false, easing: 'ease-in-out' });
   }, []);
 
   useEffect(() => {
-    // Show all services initially
-    setFilteredServices(services);
-  }, [services]);
+    // Apply all filters (search, category, price)
+    let filtered = services;
 
-  const handleFilter = async () => {
-    setFilterLoading(true);
-    try {
-      const res = await axios.get(`${import.meta.env.VITE_SERVER}/services`, {
-        params: { 
-          minPrice: minPrice || 0, 
-          maxPrice: maxPrice || 9999999 
-        }
-      });
-      setFilteredServices(res.data);
-    } catch (err) {
-      console.error(err);
+    // Search filter (case-insensitive)
+    if (searchTerm.trim()) {
+      filtered = filtered.filter(service =>
+        service.serviceName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        service.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        service.description.toLowerCase().includes(searchTerm.toLowerCase())
+      );
     }
-    setFilterLoading(false);
+
+    // Category filter
+    if (selectedCategory) {
+      filtered = filtered.filter(service => service.category === selectedCategory);
+    }
+
+    // Price filter
+    const min = minPrice ? parseFloat(minPrice) : 0;
+    const max = maxPrice ? parseFloat(maxPrice) : 9999999;
+    filtered = filtered.filter(service => {
+      const price = parseFloat(service.price);
+      return price >= min && price <= max;
+    });
+
+    setFilteredServices(filtered);
+  }, [services, searchTerm, selectedCategory, minPrice, maxPrice]);
+
+  // Reset all filters
+  const handleReset = () => {
+    setSearchTerm("");
+    setSelectedCategory("");
+    setMinPrice("");
+    setMaxPrice("");
   };
 
   return (
-    <div className="px-6 py-10">
-      <h1 className='text-center font-bold text-4xl mb-10'>Explore Home Services</h1>
+    <div className="px-6 py-10 max-w-full sm:max-w-7xl mx-auto">
+      <h1 className='text-center font-bold text-4xl mb-10 text-base-content'>Explore Home Services</h1>
 
-      {/* Filter Section */}
-      <div className="flex flex-col sm:flex-row justify-center gap-4 mb-10 items-center">
-        <div className="flex gap-2 items-center">
-          <label className="font-semibold text-base-content">Min Price:</label>
-          <input 
-            type="number"
-            className="border border-base-300 rounded-lg px-3 py-1 w-24 bg-base-100 text-base-content focus:outline-none focus:ring-2 focus:ring-primary"
-            placeholder="0"
-            value={minPrice}
-            onChange={e => setMinPrice(e.target.value)}
-          />
+      {/* Search and Filter Section */}
+      <div className="mb-8 p-6 bg-base-100 border border-base-300 rounded-lg shadow-md">
+        <div className='flex justify-between items-center flex-col md:flex-row'>
+          {/* Search Box */}
+          <div className="mb-6 w-full md:mr-2">
+            <label className="block text-base-content font-semibold mb-2">Search Services</label>
+            <input
+              type="text"
+              placeholder="Search by service name, category, or description..."
+              value={searchTerm}
+              onChange={e => setSearchTerm(e.target.value)}
+              className="w-full border border-base-300 rounded-lg px-4 py-2 bg-base-100 text-base-content focus:outline-none focus:ring-2 focus:ring-primary"
+            />
+          </div>
+
+          {/* Category Filter */}
+          <div className="mb-6 w-full md:ml-4">
+            <label className="block text-base-content font-semibold mb-2">Filter by Category</label>
+            <select
+              value={selectedCategory}
+              onChange={e => setSelectedCategory(e.target.value)}
+              className="w-full border border-base-300 rounded-lg px-4 py-2 bg-base-100 text-base-content focus:outline-none focus:ring-2 focus:ring-primary"
+            >
+              <option value="">All Categories</option>
+              {categories.map(category => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
-        <div className="flex gap-2 items-center">
-          <label className="font-semibold text-base-content">Max Price:</label>
-          <input 
-            type="number"
-            className="border border-base-300 rounded-lg px-3 py-1 w-24 bg-base-100 text-base-content focus:outline-none focus:ring-2 focus:ring-primary"
-            placeholder="9999"
-            value={maxPrice}
-            onChange={e => setMaxPrice(e.target.value)}
-          />
+
+        {/* Price Range Filters */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+          <div>
+            <label className="block text-base-content font-semibold mb-2">Min Price (৳)</label>
+            <input
+              type="number"
+              placeholder="0"
+              value={minPrice}
+              onChange={e => setMinPrice(e.target.value)}
+              className="w-full border border-base-300 rounded-lg px-4 py-2 bg-base-100 text-base-content focus:outline-none focus:ring-2 focus:ring-primary"
+            />
+          </div>
+          <div>
+            <label className="block text-base-content font-semibold mb-2">Max Price (৳)</label>
+            <input
+              type="number"
+              placeholder="9999"
+              value={maxPrice}
+              onChange={e => setMaxPrice(e.target.value)}
+              className="w-full border border-base-300 rounded-lg px-4 py-2 bg-base-100 text-base-content focus:outline-none focus:ring-2 focus:ring-primary"
+            />
+          </div>
         </div>
-        <button 
-          onClick={handleFilter}
-          className="btn-primary-custom"
+
+        {/* Reset Button */}
+        <button
+          onClick={handleReset}
+          className="btn-secondary-custom w-full"
         >
-         Filter
+          Reset Filters
         </button>
+      </div>
+
+      {/* Results Count */}
+      <div className="mb-4 text-base-content/70">
+        <p className="font-medium">Found <span className="text-primary font-bold">{filteredServices.length}</span> service(s)</p>
       </div>
 
       {/* Services Grid */}
@@ -79,23 +139,20 @@ const AllServices = () => {
         </div>
       ) : (
         <Suspense fallback={<Loader1 />}>
-          {filterLoading ? (
-            <div className="text-center font-semibold text-lg">Loading filtered services...</div>
-          ) : (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {filteredServices.length === 0 ? (
-                <div className="col-span-full text-center text-gray-500 font-medium py-10">
-                  No services found in this price range.
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {filteredServices.length === 0 ? (
+              <div className="col-span-full text-center text-base-content/60 font-medium py-10">
+                <p className="text-lg mb-2">No services found</p>
+                <p className="text-sm">Try adjusting your search or filters</p>
+              </div>
+            ) : (
+              filteredServices.map((skill, index) => (
+                <div key={skill._id} data-aos="zoom-in" data-aos-delay={index * 100}>
+                  <Card skill={skill} />
                 </div>
-              ) : (
-                filteredServices.map((skill, index) => (
-                  <div key={skill._id} data-aos="zoom-in" data-aos-delay={index * 100}>
-                    <Card skill={skill} />
-                  </div>
-                ))
-              )}
-            </div>
-          )}
+              ))
+            )}
+          </div>
         </Suspense>
       )}
     </div>

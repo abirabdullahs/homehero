@@ -469,3 +469,16 @@ html[data-theme="dark"] .btn-success-custom:hover {
 .btn-block {
   width: 100%;
 }
+
+/* Theme-aware rating stars */
+.rating-star-custom {
+  background-color: #f59e0b; /* Default orange for checked stars */
+}
+
+html[data-theme="light"] .rating-star-custom {
+  background-color: #f59e0b; /* Bright orange in light mode */
+}
+
+html[data-theme="dark"] .rating-star-custom {
+  background-color: #fbbf24; /* Lighter gold/yellow in dark mode for better visibility */
+}
