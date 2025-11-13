@@ -5,6 +5,7 @@ import { AuthContext } from '../../context/Context';
 import { signOut } from 'firebase/auth';
 import { auth } from '../../firebase/firebase.config';
 import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
 
 
 const getLinkStyle = ({ isActive }) => {
@@ -39,14 +40,34 @@ const Navbar = () => {
 
     const handleLogout = () => {
         console.log("clicked");
-        signOut(auth)
-            .then(() => {
-                toast("Logout Succesfull")
-                Navigate("/");
-            })
-            .catch((err) => {
-                toast(err);
-            })
+
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                signOut(auth)
+                    .then(() => {
+                        toast("Logout Succesfull")
+                        Navigate("/");
+                    })
+                    .catch((err) => {
+                        toast(err);
+                    })
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+                });
+            }
+        });
+
     }
 
     return (
@@ -68,7 +89,7 @@ const Navbar = () => {
                     <a className="btn btn-ghost text-2xl font-bold flex items-center gap-2 px-0 hover:bg-transparent">
                         <div className="flex items-center justify-center leading-none select-none">
                             {/* Main Logo Text */}
-                            <span className="text-2xl font-extrabold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                            <span className="text-2xl font-extrabold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
                                 Home
                             </span>
 

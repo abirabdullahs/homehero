@@ -260,6 +260,7 @@ const ServiceDetails = () => {
                                                     year: 'numeric', 
                                                     month: 'short', 
                                                     day: 'numeric' 
+                                                    
                                                 })}
                                             </span>
                                         </div>
