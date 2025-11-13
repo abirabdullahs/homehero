@@ -47,6 +47,7 @@ const Provider = ({ children }) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
+            setLoading(false);
         })
 
         return (() => {
@@ -56,7 +57,6 @@ const Provider = ({ children }) => {
     }, [])
 
 
-    // apply theme to document and persist
     useEffect(() => {
         try {
             if (typeof document !== 'undefined') {
@@ -78,23 +78,19 @@ const Provider = ({ children }) => {
     // API fetch function
     const fetchServices = async () => {
         try {
-            const res = await axios.get(`${import.meta.env.VITE_SERVER}/services`); // তোমার API URL
-            setServices(res.data); // context state update
-            setLoading(false);
+            const res = await axios.get(`${import.meta.env.VITE_SERVER}/services`);
+            setServices(res.data);
         } catch (error) {
             console.error("Error fetching services:", error);
-            setLoading(false);
         }
     };
 
     const fetchBookings = async () => {
         try {
-            const res = await axios.get(`${import.meta.env.VITE_SERVER}/bookings`); // তোমার API URL
-            setBookings(res.data); // context state update
-            setLoading(false);
+            const res = await axios.get(`${import.meta.env.VITE_SERVER}/bookings`);
+            setBookings(res.data);
         } catch (error) {
-            console.error("Error fetching services:", error);
-            setLoading(false);
+            console.error("Error fetching bookings:", error);
         }
     };
 

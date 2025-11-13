@@ -34,11 +34,10 @@ const Card = ({ skill }) => {
           <span className="text-gray-500">{skill.name || "Provider"}</span>
         </div>
 
-        <Link
-        to={Navigate(`/service/${skill._id}`)}
-          className="block w-full text-center linear-to-r from-purple-600 to-blue-500 text-white py-2.5 rounded-xl font-medium hover:from-purple-700 hover:to-blue-600 transition-all duration-300"
-        >
-          View Details
+        <Link to={`/service/${skill._id}`}>
+          <button className="block w-full text-center bg-linear-to-r from-purple-600 to-blue-500 text-white py-2.5 rounded-xl font-medium hover:from-purple-700 hover:to-blue-600 transition-all duration-300">
+            View Details
+          </button>
         </Link>
       </div>
     </div>
