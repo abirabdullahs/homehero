@@ -30,7 +30,7 @@ const Home = () => {
 
             <Hero></Hero>
 
-            <h1 className='text-center font-bold text-4xl my-5 text-gray-800 dark:text-white'>Explore Home Service</h1>
+            <h1 className='text-center font-bold text-4xl my-5 text-base-content'>Explore Home Service</h1>
 
             <Suspense fallback={<Loader1></Loader1>}>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 px-6 mb-5">
@@ -46,106 +46,106 @@ const Home = () => {
 
 
             <div className="flex items-center justify-center">
-                <button className="btn-neutral btn text-center" onClick={() => { Navigate("/services") }}>Show More</button>
+                <button className="btn-primary-custom" onClick={() => { Navigate("/services") }}>Show More</button>
             </div>
 
 
             <section className="my-16" data-aos="fade-up">
-                <h2 className="text-3xl font-bold mb-10 text-center text-gray-800 dark:text-base-content">
+                <h2 className="text-3xl font-bold mb-10 text-center text-base-content">
                     How Our Service Works
                 </h2>
-                <div className="grid md:grid-cols-3 gap-10 text-center max-w-6xl mx-auto">
+                <div className="grid md:grid-cols-3 gap-10 text-center max-w-6xl mx-auto px-4">
                     <div
-                        className="p-6 bg-white dark:bg-base-200 rounded-xl shadow hover:shadow-lg transition duration-300"
+                        className="p-6 bg-base-100 border border-base-300 rounded-xl shadow hover:shadow-lg transition duration-300"
                         data-aos="fade-right"
                         data-aos-delay="100"
                     >
-                        <h3 className="text-xl font-semibold text-purple-600 dark:text-purple-400 mb-2">1️⃣ Request a Service</h3>
-                        <p className="text-gray-600 dark:text-gray-300">
+                        <h3 className="text-xl font-semibold text-primary mb-2">1️⃣ Request a Service</h3>
+                        <p className="text-base-content/70">
                             Tell us what home service you need—plumbing, cleaning, electrical work, or more.
                         </p>
                     </div>
                     <div
-                        className="p-6 bg-white dark:bg-base-200 rounded-xl shadow hover:shadow-lg transition duration-300"
+                        className="p-6 bg-base-100 border border-base-300 rounded-xl shadow hover:shadow-lg transition duration-300"
                         data-aos="fade-up"
                         data-aos-delay="200"
                     >
-                        <h3 className="text-xl font-semibold text-purple-600 dark:text-purple-400 mb-2">2️⃣ Get Matched</h3>
-                        <p className="text-gray-600 dark:text-gray-300">
+                        <h3 className="text-xl font-semibold text-primary mb-2">2️⃣ Get Matched</h3>
+                        <p className="text-base-content/70">
                             We connect you with verified local professionals ready to help.
                         </p>
                     </div>
                     <div
-                        className="p-6 bg-white dark:bg-base-200 rounded-xl shadow hover:shadow-lg transition duration-300"
+                        className="p-6 bg-base-100 border border-base-300 rounded-xl shadow hover:shadow-lg transition duration-300"
                         data-aos="fade-left"
                         data-aos-delay="300"
                     >
-                        <h3 className="text-xl font-semibold text-purple-600 dark:text-purple-400 mb-2">3️⃣ Service & Satisfaction</h3>
-                        <p className="text-gray-600 dark:text-gray-300">
+                        <h3 className="text-xl font-semibold text-primary mb-2">3️⃣ Service & Satisfaction</h3>
+                        <p className="text-base-content/70">
                             Professionals come to your home and provide high-quality service. Satisfaction guaranteed.
                         </p>
                     </div>
                 </div>
             </section>
 
-            <section className="bg-purple-50 dark:bg-base-300 py-16">
-                <h2 className="text-3xl font-bold text-center mb-12 text-gray-800 dark:text-base-content">
+            <section className="bg-base-200 py-16">
+                <h2 className="text-3xl font-bold text-center mb-12 text-base-content">
                     What Our Customers Say
                 </h2>
-                <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    <div className="p-6 bg-white dark:bg-base-200 rounded-xl shadow">
-                        <p className="italic text-gray-700 dark:text-gray-300">
+                <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto px-4">
+                    <div className="p-6 bg-base-100 border border-base-300 rounded-xl shadow hover:shadow-lg transition duration-300">
+                        <p className="italic text-base-content/70">
                             "The electrician arrived on time and fixed everything quickly. Highly recommend!"
                         </p>
-                        <h4 className="mt-4 font-semibold text-purple-600 dark:text-purple-400">— John K.</h4>
+                        <h4 className="mt-4 font-semibold text-primary">— John K.</h4>
                     </div>
-                    <div className="p-6 bg-white dark:bg-base-200 rounded-xl shadow">
-                        <p className="italic text-gray-700 dark:text-gray-300">
+                    <div className="p-6 bg-base-100 border border-base-300 rounded-xl shadow hover:shadow-lg transition duration-300">
+                        <p className="italic text-base-content/70">
                             "Our house was sparkling clean in no time. Professional and reliable cleaning service."
                         </p>
-                        <h4 className="mt-4 font-semibold text-purple-600 dark:text-purple-400">— Priya S.</h4>
+                        <h4 className="mt-4 font-semibold text-primary">— Priya S.</h4>
                     </div>
-                    <div className="p-6 bg-white dark:bg-base-200 rounded-xl shadow">
-                        <p className="italic text-gray-700 dark:text-gray-300">
+                    <div className="p-6 bg-base-100 border border-base-300 rounded-xl shadow hover:shadow-lg transition duration-300">
+                        <p className="italic text-base-content/70">
                             "Plumbing issue solved instantly. Affordable, fast, and friendly service."
                         </p>
-                        <h4 className="mt-4 font-semibold text-purple-600 dark:text-purple-400">— Ahmed R.</h4>
+                        <h4 className="mt-4 font-semibold text-primary">— Ahmed R.</h4>
                     </div>
                 </div>
             </section>
 
-            <section className="bg-gray-50 dark:bg-base-300 py-16" data-aos="fade-up">
-                <h2 className="text-3xl font-bold text-center mb-12 text-gray-800 dark:text-base-content">
-                    Why Choose <span className="text-purple-600 dark:text-purple-400">HomeHero</span>?
+            <section className="bg-base-100 py-16 border-t border-base-300" data-aos="fade-up">
+                <h2 className="text-3xl font-bold text-center mb-12 text-base-content">
+                    Why Choose <span className="text-primary">HomeHero</span>?
                 </h2>
-                <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto text-center">
+                <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto text-center px-4">
                     <div
-                        className="p-6 bg-white dark:bg-base-200 rounded-xl shadow hover:shadow-lg transition duration-300"
+                        className="p-6 bg-base-200 border border-base-300 rounded-xl shadow hover:shadow-lg transition duration-300"
                         data-aos="fade-right"
                         data-aos-delay="100"
                     >
-                        <h4 className="text-xl font-semibold text-purple-600 dark:text-purple-400 mb-2">Trusted Professionals</h4>
-                        <p className="text-gray-700 dark:text-gray-300">
+                        <h4 className="text-xl font-semibold text-primary mb-2">Trusted Professionals</h4>
+                        <p className="text-base-content/70">
                             Verified and experienced service providers ensure quality work every time.
                         </p>
                     </div>
                     <div
-                        className="p-6 bg-white dark:bg-base-200 rounded-xl shadow hover:shadow-lg transition duration-300"
+                        className="p-6 bg-base-200 border border-base-300 rounded-xl shadow hover:shadow-lg transition duration-300"
                         data-aos="fade-up"
                         data-aos-delay="200"
                     >
-                        <h4 className="text-xl font-semibold text-purple-600 dark:text-purple-400 mb-2">Affordable & Transparent</h4>
-                        <p className="text-gray-700 dark:text-gray-300">
+                        <h4 className="text-xl font-semibold text-primary mb-2">Affordable & Transparent</h4>
+                        <p className="text-base-content/70">
                             Clear pricing, no hidden charges, and cost-effective solutions for your home.
                         </p>
                     </div>
                     <div
-                        className="p-6 bg-white dark:bg-base-200 rounded-xl shadow hover:shadow-lg transition duration-300"
+                        className="p-6 bg-base-200 border border-base-300 rounded-xl shadow hover:shadow-lg transition duration-300"
                         data-aos="fade-left"
                         data-aos-delay="300"
                     >
-                        <h4 className="text-xl font-semibold text-purple-600 dark:text-purple-400 mb-2">Hassle-Free Experience</h4>
-                        <p className="text-gray-700 dark:text-gray-300">
+                        <h4 className="text-xl font-semibold text-primary mb-2">Hassle-Free Experience</h4>
+                        <p className="text-base-content/70">
                             Book, schedule, and pay easily—all in one platform, making your life simpler.
                         </p>
                     </div>

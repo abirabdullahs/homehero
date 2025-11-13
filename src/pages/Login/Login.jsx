@@ -108,7 +108,7 @@ const Login = () => {
                 {/* Login Button */}
                 <button
                   type="submit"
-                  className="btn btn-neutral mt-4 w-full"
+                  className="btn-primary-custom w-full mt-4"
                 >
                   Login
                 </button>

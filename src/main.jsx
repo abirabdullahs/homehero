@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Toaster } from 'react-hot-toast';
 import { createRoot } from 'react-dom/client';
 import Provider from './context/Provider';
+import { ThemeInitializer } from './components/ThemeInitializer/ThemeInitializer.jsx';
 
 
 
@@ -14,6 +15,7 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
   <Provider>
     <>
+      <ThemeInitializer />
       <RouterProvider router={router} />
       <ToastContainer position="top-right" autoClose={2000} />
       <Toaster position="top-right" toastOptions={{ duration: 2500 }} />

@@ -168,13 +168,13 @@ const MyServices = () => {
                                     <td>
                                         <div className="flex justify-center gap-2">
                                             <button
-                                                className="btn btn-neutral btn-outline"
+                                                className="btn-primary-custom btn-sm"
                                                 onClick={() => handleEdit(service)}
                                             >
                                                 Edit
                                             </button>
                                             <button
-                                                className="btn btn-neutral text-white"
+                                                className="btn-danger-custom btn-sm"
                                                 onClick={() => handleDelete(service._id)}
                                             >
                                                 Delete
@@ -232,7 +232,7 @@ const MyServices = () => {
                         />
 
 
-                        <button type="submit" className="btn btn-primary w-full mt-4">
+                        <button type="submit" className="btn-primary-custom w-full mt-4">
                             Save Changes
                         </button>
                     </form>

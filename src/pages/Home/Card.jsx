@@ -7,7 +7,7 @@ const Card = ({ skill }) => {
 
   return (
     <div
-      className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden border border-gray-200"
+      className="group bg-base-100 rounded-2xl shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden border border-base-300"
       data-aos="fade-up"
     >
       {/* Image */}
@@ -26,12 +26,12 @@ const Card = ({ skill }) => {
       {/* Content */}
       <div className="p-5 flex flex-col justify-between h-[280px]">
         <div>
-          <h3 className="text-xl font-semibold mb-2 text-gray-800">
+          <h3 className="text-xl font-semibold mb-2 text-base-content">
             {skill.serviceName || "Service Name"}
           </h3>
 
           {/* Description with fixed height */}
-          <p className="text-gray-500 text-sm mb-3 h-16 overflow-hidden line-clamp-3">
+          <p className="text-base-content/60 text-sm mb-3 h-16 overflow-hidden line-clamp-3">
             {skill.description || "Short description..."}
           </p>
 
@@ -42,7 +42,7 @@ const Card = ({ skill }) => {
                 <svg
                   key={i}
                   xmlns="http://www.w3.org/2000/svg"
-                  className={`h-5 w-5 ${i <= Math.round(avgRating) ? "fill-current" : "text-gray-300"}`}
+                  className={`h-5 w-5 ${i <= Math.round(avgRating) ? "fill-current" : "text-base-300"}`}
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
@@ -50,18 +50,18 @@ const Card = ({ skill }) => {
                 </svg>
               ))}
             </div>
-            <span className="text-gray-600 text-sm">{avgRating}</span>
+            <span className="text-base-content/70 text-sm">{avgRating}</span>
           </div>
 
-          <div className="flex justify-between items-center text-sm text-gray-700 mb-3">
-            <span className="font-semibold text-purple-600">৳ {skill.price || "N/A"}</span>
-            <span className="text-gray-500">{skill.name || "Provider"}</span>
+          <div className="flex justify-between items-center text-sm text-base-content/70 mb-3">
+            <span className="font-semibold text-primary">৳ {skill.price || "N/A"}</span>
+            <span className="text-base-content/60">{skill.name || "Provider"}</span>
           </div>
         </div>
 
         {/* Button */}
         <Link to={`/service/${skill._id}`}>
-          <button className="block w-full text-center bg-linear-to-r from-purple-600 to-blue-500 text-white py-2.5 rounded-xl font-medium hover:from-purple-700 hover:to-blue-600 transition-all duration-300">
+          <button className="btn-primary-custom w-full">
             View Details
           </button>
         </Link>

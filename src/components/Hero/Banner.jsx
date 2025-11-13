@@ -1,61 +1,53 @@
-// Banner.jsx
+// HeroBanner.jsx
 import React from "react";
 
-const Banner = ({
-  imageUrl = "https://via.placeholder.com/1200x500",
-  linkUrl = "#",
-  title = "Your Title Here",
-  paragraph = "You can customize this",
-  buttonText = "Explore Now",
+const HeroBanner = ({
+  imageUrl = "https://via.placeholder.com/1200x600",
+  title = "Transform Your Home Services",
+  subtitle = "Find the best professionals for cleaning, repairs, and more.",
+  buttonText = "Get Started",
   onButtonClick = null,
 }) => {
   return (
-    <section className="w-full">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="relative rounded-xl overflow-hidden shadow-lg">
-        
-          <a href={linkUrl} target="_blank" rel="noopener noreferrer" className="block">
-            <img
-              src={imageUrl}
-              alt={title}
-              className="w-full h-64 sm:h-80 md:h-96 object-cover transition-transform duration-500 hover:scale-105"
-            />
+    <section className="relative w-full h-[600px] sm:h-[650px] md:h-[700px] lg:h-[750px] overflow-hidden">
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center transform transition-transform duration-700 hover:scale-105"
+        style={{ backgroundImage: `url(${imageUrl})` }}
+      ></div>
+
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-linear-to-b from-black/50 via-black/30 to-black/50"></div>
+
+      {/* Content */}
+      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4 animate-fadeInDown">
+          {title}
+        </h1>
+        <p className="text-white text-sm sm:text-base md:text-lg lg:text-xl mb-8 max-w-3xl animate-fadeInUp">
+          {subtitle}
+        </p>
+        {onButtonClick ? (
+          <button
+            onClick={onButtonClick}
+            className="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 transform hover:-translate-y-1 hover:scale-105"
+          >
+            {buttonText}
+          </button>
+        ) : (
+          <a
+            href="#services"
+            className="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 transform hover:-translate-y-1 hover:scale-105"
+          >
+            {buttonText}
           </a>
-
-         
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="bg-black/60 w-full h-full"></div>
-            <div className="absolute px-6 py-8 text-center text-white max-w-2xl">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-3 drop-shadow">
-                {title}
-              </h2>
-              <p className="text-sm sm:text-base md:text-lg opacity-95 mb-6">{paragraph}</p>
-
-              <div className="flex justify-center">
-                {onButtonClick ? (
-                  <button
-                    onClick={onButtonClick}
-                    className="px-6 py-2 rounded-md bg-indigo-600 hover:bg-indigo-700 transition text-white font-medium"
-                  >
-                    {buttonText}
-                  </button>
-                ) : (
-                  <a
-                    href={linkUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-6 py-2 rounded-md bg-indigo-600 hover:bg-indigo-700 transition text-white font-medium"
-                  >
-                    {buttonText}
-                  </a>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
+        )}
       </div>
+
+      {/* Optional Decorative Shapes */}
+      <div className="absolute bottom-0 left-0 w-full h-24 bg-linear-to-t from-white/0 to-white/20 pointer-events-none"></div>
     </section>
   );
 };
 
-export default Banner;
+export default HeroBanner;

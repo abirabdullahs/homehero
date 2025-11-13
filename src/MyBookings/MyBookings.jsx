@@ -121,8 +121,8 @@ const MyBookings = () => {
                                         <td>{serviceInfo?.price}</td>
                                         <td>
                                             <div className="flex justify-center gap-2">
-                                                <button className="btn btn-neutral text-white" onClick={() => handleCancel(b._id)}>Cancel</button>
-                                                <button className="btn btn-neutral text-white" onClick={() => {
+                                                <button className="btn-danger-custom btn-sm" onClick={() => handleCancel(b._id)}>Cancel</button>
+                                                <button className="btn-primary-custom btn-sm" onClick={() => {
                                                     setCurrentServiceId(b.serviceId);
                                                     document.getElementById('my_modal_5').showModal();
                                                 }}>Review</button>
@@ -215,7 +215,7 @@ const MyBookings = () => {
                             </div>
 
                             {/* Submit Button */}
-                            <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg"
+                            <button className="btn-primary-custom w-full"
 
                             >
                                 Submit Review

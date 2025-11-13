@@ -9,9 +9,10 @@ import { toast } from 'react-toastify';
 
 const getLinkStyle = ({ isActive }) => {
     return {
-        color: isActive ? '#2563eb' : '', 
-        borderBottom: isActive ? '2px solid #2563eb' : 'none', 
-        paddingBottom: '2px'
+        color: isActive ? '#8b5cf6' : '',
+        borderBottom: isActive ? '2px solid #8b5cf6' : 'none',
+        paddingBottom: '2px',
+        transition: 'all 0.3s ease'
     };
 };
 
@@ -50,7 +51,7 @@ const Navbar = () => {
 
     return (
         <div>
-            <div className="navbar bg-base-100 shadow-sm mx-auto">
+            <div className="navbar w-7xl bg-base-100 shadow-sm mx-auto mb-1">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -64,7 +65,20 @@ const Navbar = () => {
                             }
                         </ul>
                     </div>
-                    <a className="btn btn-ghost text-xl">Home<span className="text-purple-600">Hero</span></a>
+                    <a className="btn btn-ghost text-2xl font-bold flex items-center gap-2 px-0 hover:bg-transparent">
+                        <div className="flex items-center justify-center leading-none select-none">
+                            {/* Main Logo Text */}
+                            <span className="text-2xl font-extrabold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                                Home
+                            </span>
+
+                            {/* Sub Text */}
+                            <span className="text-xs font-semibold text-base-content/70 mt-1">
+                                Hero
+                            </span>
+                        </div>
+
+                    </a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1 gap-10">
@@ -74,32 +88,27 @@ const Navbar = () => {
                         }
                     </ul>
                 </div>
-                <div className="navbar-end">
+                <div className="navbar-end gap-4">
                     {/* theme toggle */}
-                    <div className="mr-3">
-                        <label className="swap swap-rotate cursor-pointer">
-                            {/* this hidden checkbox controls the swap */}
-                            <input type="checkbox" onChange={toggleTheme} checked={theme === 'dark'} />
-
-                            {/* moon icon (shown when checked) */}
-                            <svg className="swap-on fill-current w-6 h-6 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path d="M21.64 13a9 9 0 11-9.63-9.63 7 7 0 109.63 9.63z" />
-                            </svg>
-
-                            {/* sun icon (shown when unchecked) */}
-                            <svg className="swap-off fill-current w-6 h-6 text-yellow-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path d="M12 3v2M12 19v2M5 5l1.5 1.5M17.5 17.5L19 19M3 12h2M19 12h2M5 19l1.5-1.5M17.5 6.5L19 5M12 7a5 5 0 100 10 5 5 0 000-10z" />
-                            </svg>
-                        </label>
+                    <div>
+                        <button
+                            onClick={toggleTheme}
+                            className={`theme-toggle ${theme === 'dark' ? 'dark' : 'light'}`}
+                            aria-pressed={theme === 'dark'}
+                            aria-label="Toggle theme"
+                            title="Toggle theme"
+                        >
+                            <span className="moon" aria-hidden="true" />
+                        </button>
                     </div>
                     {
                         !user ?
-                            <div className='flex gap-3 pr-5'>
-                                <button className='btn-primary px-2 bg-black text-white rounded py-1'onClick={()=>Navigate('/login')}>Login</button>
-                                <button className='btn-primary px-2 bg-black text-white rounded py-1' onClick={()=>Navigate('/signup')}>SignUp</button>
+                            <div className='flex gap-2'>
+                                <button className='btn-primary-custom btn-sm' onClick={() => Navigate('/login')}>Login</button>
+                                <button className='btn-secondary-custom btn-sm' onClick={() => Navigate('/signup')}>SignUp</button>
                             </div>
                             :
-                            <button className='btn-primary px-2 bg-red-800 text-white rounded py-1' onClick={handleLogout}>Logout</button>
+                            <button className='btn-danger-custom btn-sm' onClick={handleLogout}>Logout</button>
                     }
                 </div>
             </div>

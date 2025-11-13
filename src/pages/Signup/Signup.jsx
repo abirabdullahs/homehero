@@ -126,7 +126,7 @@ const Signup = () => {
                                     {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
 
                                     <button
-                                        className="btn btn-neutral mt-4"
+                                        className="btn-primary-custom w-full mt-4"
                                         type="submit"
                                         disabled={!!error}
                                     >

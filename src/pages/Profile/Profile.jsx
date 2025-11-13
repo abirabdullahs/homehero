@@ -41,7 +41,7 @@ const Profile = () => {
                 </div>
 
                 <div>
-                    <button className='btn-primary bg-green-400 dark:bg-green-600 mt-7 px-5 rounded shadow-md py-1 w-full text-white' onClick={handleClick}>Update Profile</button>
+                    <button className='btn-primary-custom mt-7 w-full' onClick={handleClick}>Update Profile</button>
                 </div>
             </div>
         </div>

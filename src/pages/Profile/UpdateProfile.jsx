@@ -60,59 +60,59 @@ const UpdateProfile = () => {
 
     return (
         <div className='flex justify-center p-20'>
-            <form onSubmit={handleSubmit} className="space-y-4 w-full max-w-2xl p-5 shadow-md rounded">
+            <form onSubmit={handleSubmit} className="space-y-4 w-full max-w-2xl p-5 shadow-md rounded bg-base-100 border border-base-300">
                 
                 <div>
-                    <label className="block mb-1 font-medium">Profile Image URL</label>
+                    <label className="block mb-1 font-medium text-base-content">Profile Image URL</label>
                     <input
                         type="text"
                         name="photoURL"
                         placeholder="Image URL"
                         value={editUser.photoURL}
                         onChange={handleChange}
-                        className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        className="w-full border border-base-300 rounded px-3 py-2 bg-base-100 text-base-content focus:outline-none focus:ring-2 focus:ring-primary"
                     />
                 </div>
 
                 <div>
-                    <label className="block mb-1 font-medium">Name</label>
+                    <label className="block mb-1 font-medium text-base-content">Name</label>
                     <input
                         type="text"
                         name="displayName"
                         placeholder="Name"
                         value={editUser.displayName}
                         onChange={handleChange}
-                        className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        className="w-full border border-base-300 rounded px-3 py-2 bg-base-100 text-base-content focus:outline-none focus:ring-2 focus:ring-primary"
                     />
                 </div>
 
                 <div>
-                    <label className="block mb-1 font-medium">Number</label>
+                    <label className="block mb-1 font-medium text-base-content">Number</label>
                     <input
                         type="text"
                         name="number"
                         placeholder="Number"
                         value={editUser.number}
                         onChange={handleChange}
-                        className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        className="w-full border border-base-300 rounded px-3 py-2 bg-base-100 text-base-content focus:outline-none focus:ring-2 focus:ring-primary"
                     />
                 </div>
 
                 <div>
-                    <label className="block mb-1 font-medium">Institute</label>
+                    <label className="block mb-1 font-medium text-base-content">Institute</label>
                     <input
                         type="text"
                         name="institute"
                         placeholder="Institute"
                         value={editUser.institute}
                         onChange={handleChange}
-                        className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        className="w-full border border-base-300 rounded px-3 py-2 bg-base-100 text-base-content focus:outline-none focus:ring-2 focus:ring-primary"
                     />
                 </div>
 
                 <button
                     type="submit"
-                    className="w-full bg-blue-500 text-white font-semibold py-2 rounded hover:bg-blue-600 transition-colors"
+                    className="btn-primary-custom w-full"
                 >
                     Save Changes
                 </button>
