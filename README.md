@@ -22,7 +22,6 @@ Live site: https://homehero-9706a.web.app  <!-- Replace with the actual URL -->
 
 ## Quick Notes
 
-- Replace the Live site URL above with your deployed URL.
 - Environment variables: ensure `VITE_SERVER` is set to your backend server URL when running locally or in production.
 
 ## How to run locally (developer)
@@ -30,7 +29,7 @@ Live site: https://homehero-9706a.web.app  <!-- Replace with the actual URL -->
 1. Install dependencies
 
 ```powershell
-cd "f:\web projects\PH-assignment\homehero"
+cd "your project folder/homeHero"
 npm install
 ```
 
@@ -45,5 +44,3 @@ npm run dev
 ```powershell
 npm run build
 ```
-
-If you want, I can also add a short section describing the main pages and components, or update the README with your live URL. Let me know and I'll update it now.
